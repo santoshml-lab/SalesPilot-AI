@@ -1,14 +1,19 @@
 .dashboard{
 
+  margin-left:260px;
+
+  margin-top:80px;
+
   padding:40px;
 
   min-height:100vh;
 
-  background:#0f172a;
+  background:#050816;
 
   color:white;
 
 }
+
 
 
 .dashboard h1{
