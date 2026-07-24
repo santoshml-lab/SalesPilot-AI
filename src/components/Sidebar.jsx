@@ -1,8 +1,12 @@
+import "../styles/sidebar.css";
 
 export default function Sidebar() {
   return (
-    <aside>
-      <h2>SalesPilot AI</h2>
+    <aside className="sidebar">
+
+      <h2>
+        🚀 SalesPilot AI
+      </h2>
 
       <ul>
         <li>🏠 Dashboard</li>
@@ -13,6 +17,7 @@ export default function Sidebar() {
         <li>📊 Analytics</li>
         <li>⚙️ Settings</li>
       </ul>
+
     </aside>
   );
 }
