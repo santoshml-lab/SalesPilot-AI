@@ -1,11 +1,12 @@
-import StatCard from "../components/StatCard";
 import "../styles/dashboard.css";
+import StatCard from "../components/StatCard";
+import SalesChart from "../components/SalesChart";
 
 export default function Dashboard() {
 
   return (
 
-    <div>
+    <div className="dashboard">
 
       <h1>
         Sales Dashboard
@@ -16,7 +17,7 @@ export default function Dashboard() {
       </p>
 
 
-      <div>
+      <div className="stats-container">
 
         <StatCard
           title="Revenue"
@@ -24,20 +25,17 @@ export default function Dashboard() {
           icon="💰"
         />
 
-
         <StatCard
           title="Customers"
           value="1,284"
           icon="👥"
         />
 
-
         <StatCard
           title="Deals"
           value="68"
           icon="💼"
         />
-
 
         <StatCard
           title="Conversion"
@@ -47,6 +45,8 @@ export default function Dashboard() {
 
       </div>
 
+
+      <SalesChart />
 
     </div>
 
