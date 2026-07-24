@@ -1,15 +1,23 @@
+import "../styles/navbar.css";
+
 export default function Navbar() {
   return (
-    <nav>
+    <nav className="navbar">
 
-      <h3>
-        SalesPilot AI
-      </h3>
+      <div className="search-box">
+        🔍 Search...
+      </div>
 
-      <div>
-        🔔 Notifications
-        <br />
-        👤 Admin
+      <div className="nav-right">
+
+        <span>
+          🔔
+        </span>
+
+        <span>
+          👤 Admin
+        </span>
+
       </div>
 
     </nav>
