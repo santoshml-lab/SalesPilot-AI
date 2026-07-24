@@ -6,32 +6,21 @@ export default function StatCard({ title, value, icon }) {
 
     <div className="stat-card">
 
-      <h3>
-        {icon} {title}
-      </h3>
+      <div className="stat-icon">
+        {icon}
+      </div>
 
-      <h2>
-        {value}
-      </h2>
+      <div>
 
-    </div>
+        <h3>
+          {title}
+        </h3>
 
-  );
+        <h2>
+          {value}
+        </h2>
 
-}
-export default function StatCard({ title, value, icon }) {
-
-  return (
-
-    <div>
-
-      <h3>
-        {icon} {title}
-      </h3>
-
-      <h2>
-        {value}
-      </h2>
+      </div>
 
     </div>
 
