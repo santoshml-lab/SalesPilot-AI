@@ -1,5 +1,13 @@
 .navbar{
 
+  position:fixed;
+
+  top:0;
+
+  left:260px;
+
+  width:calc(100% - 260px);
+
   height:80px;
 
   display:flex;
@@ -10,15 +18,19 @@
 
   padding:0 40px;
 
-  background:rgba(15,23,42,0.7);
+  background:#0f172a;
 
-  backdrop-filter:blur(20px);
-
-  border-bottom:1px solid rgba(255,255,255,0.1);
+  border-bottom:1px solid rgba(255,255,255,.1);
 
   color:white;
 
+  z-index:1000;
+
 }
+
+  
+
+  
 
 
 .search-box{
