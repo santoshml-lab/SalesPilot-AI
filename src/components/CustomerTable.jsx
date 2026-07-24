@@ -1,3 +1,4 @@
+import "../styles/customer.css";
 export default function CustomerTable(){
 
   const customers = [
@@ -21,14 +22,14 @@ export default function CustomerTable(){
 
   return (
 
-    <div>
+    <div className="customer-card">
 
       <h2>
         Recent Customers
       </h2>
 
 
-      <table>
+      <table className="customer-table">
 
         <thead>
 
