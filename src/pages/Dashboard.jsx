@@ -1,6 +1,7 @@
 import "../styles/dashboard.css";
 import StatCard from "../components/StatCard";
 import SalesChart from "../components/SalesChart";
+import CustomerTable from "../components/CustomerTable";
 
 export default function Dashboard() {
 
@@ -47,6 +48,8 @@ export default function Dashboard() {
 
 
       <SalesChart />
+      <CustomerTable />
+      
 
     </div>
 
