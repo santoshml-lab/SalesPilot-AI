@@ -1,4 +1,5 @@
 import StatCard from "../components/StatCard";
+import "../styles/dashboard.css";
 
 export default function Dashboard() {
 
