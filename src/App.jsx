@@ -1,4 +1,6 @@
+
 import Sidebar from "./components/Sidebar";
+import Navbar from "./components/Navbar";
 
 export default function App() {
 
@@ -7,6 +9,8 @@ export default function App() {
     <div>
 
       <Sidebar />
+
+      <Navbar />
 
     </div>
 
