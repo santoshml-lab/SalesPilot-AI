@@ -1,3 +1,4 @@
+import "../styles/chart.css";
 import {
   LineChart,
   Line,
@@ -37,7 +38,7 @@ export default function SalesChart(){
 
   return (
 
-    <div>
+    <div className="chart-card">
 
       <h2>
         Sales Growth
