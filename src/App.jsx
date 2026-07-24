@@ -1,6 +1,6 @@
-
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
+import Dashboard from "./pages/Dashboard";
 
 export default function App() {
 
@@ -11,6 +11,8 @@ export default function App() {
       <Sidebar />
 
       <Navbar />
+
+      <Dashboard />
 
     </div>
 
