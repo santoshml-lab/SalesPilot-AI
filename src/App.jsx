@@ -3,21 +3,16 @@ import Navbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard";
 
 export default function App() {
-
   return (
-
-    <div>
-
+    <div style={{ display: "flex" }}>
       <Sidebar />
 
-      <Navbar />
-
-      <Dashboard />
-
+      <div style={{ flex: 1 }}>
+        <Navbar />
+        <Dashboard />
+      </div>
     </div>
-
   );
-
 }
 
 
