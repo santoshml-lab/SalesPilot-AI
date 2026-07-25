@@ -52,17 +52,14 @@ export default function Deals() {
 
       </div>
 
-      <div style={{ marginBottom: "20px" }}>
-
-        <input
-          className="search-box-customer"
-          type="text"
-          placeholder="🔍 Search Client..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-
-      </div>
+      <input
+        className="search-box-customer"
+        type="text"
+        placeholder="🔍 Search Client..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        style={{ marginBottom: "20px", width: "100%" }}
+      />
 
       <table className="customers-table">
 
@@ -96,9 +93,18 @@ export default function Deals() {
                 <td>{deal.status}</td>
 
                 <td>
-                  <button onClick={() => deleteDeal(deal.id)}>
+
+                  <button>
+                    Edit
+                  </button>
+
+                  <button
+                    style={{ marginLeft: "10px" }}
+                    onClick={() => deleteDeal(deal.id)}
+                  >
                     Delete
                   </button>
+
                 </td>
 
               </tr>
