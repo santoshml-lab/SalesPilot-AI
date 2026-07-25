@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import "../styles/customers.css";
 
-export default function Deals() {
+export default function Deals({ setPage }) {
 
   const [deals, setDeals] = useState([]);
   const [search, setSearch] = useState("");
@@ -48,7 +48,9 @@ export default function Deals() {
 
         <h1>Deals</h1>
 
-        <button>Add Deal</button>
+        <button onClick={() => setPage("addDeal")}>
+  Add Deal
+</button>
 
       </div>
 
