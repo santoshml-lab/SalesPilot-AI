@@ -1,6 +1,6 @@
 import "../styles/login.css";
 
-export default function Login() {
+export default function Login({ setPage }) {
   return (
     <div className="login-container">
 
@@ -20,9 +20,29 @@ export default function Login() {
           placeholder="Password"
         />
 
-        <button>
+        <button onClick={() => setPage("dashboard")}>
           Login
         </button>
+
+        <p
+          style={{
+            marginTop: "20px",
+            textAlign: "center",
+            color: "#94a3b8"
+          }}
+        >
+          Don't have an account?{" "}
+          <span
+            onClick={() => setPage("signup")}
+            style={{
+              color: "#3b82f6",
+              cursor: "pointer",
+              fontWeight: "bold"
+            }}
+          >
+            Sign Up
+          </span>
+        </p>
 
       </div>
 
