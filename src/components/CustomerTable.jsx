@@ -105,12 +105,15 @@ export default function CustomerTable() {
       </div>
 
       <input
-  className="search-box-customer"
   type="text"
   placeholder="Search by Name or Company..."
   value={search}
   onChange={(e) => setSearch(e.target.value)}
+  className="search-box-customer"
 />
+  
+  
+  
                  
       <table className="customer-table">
 
