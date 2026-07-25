@@ -105,24 +105,27 @@ export default function CustomerTable() {
       </div>
 
       <div
+
+     <div
   style={{
     position: "relative",
-    zIndex: 999999,
-    background: "red",
-    padding: "10px"
+    zIndex: 10,
+    marginBottom: "20px"
   }}
 >
   <input
+    className="search-box-customer"
     type="text"
-    placeholder="Search..."
+    placeholder="Search by Name or Company..."
     value={search}
     onChange={(e) => setSearch(e.target.value)}
-    style={{
-      width: "100%",
-      padding: "12px"
-    }}
   />
-</div>
+</div>   
+    
+    
+  
+
+    
   
   
   
