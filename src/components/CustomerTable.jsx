@@ -9,6 +9,7 @@ export default function CustomerTable() {
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [status, setStatus] = useState("");
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     fetchCustomers();
