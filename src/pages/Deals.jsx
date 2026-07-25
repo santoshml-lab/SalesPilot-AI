@@ -19,6 +19,9 @@ export default function Deals() {
       status: "Lost"
     }
   ];
+  const [client, setClient] = useState("");
+  const [amount, setAmount] = useState("");
+  const [status, setStatus] = useState("");
 
   return (
     <div className="customers-page">
