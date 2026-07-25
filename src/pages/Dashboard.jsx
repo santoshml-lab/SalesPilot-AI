@@ -1,9 +1,30 @@
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabase";
+
 import "../styles/dashboard.css";
 import StatCard from "../components/StatCard";
 import SalesChart from "../components/SalesChart";
 import CustomerTable from "../components/CustomerTable";
 
 export default function Dashboard() {
+
+  const [customerCount, setCustomerCount] = useState(0);
+
+  useEffect(() => {
+    loadCustomerCount();
+  }, []);
+
+  async function loadCustomerCount() {
+    const { count, error } = await supabase
+      .from("customers")
+      .select("*", { count: "exact", head: true });
+
+    if (error) {
+      console.error(error);
+    } else {
+      setCustomerCount(count);
+    }
+  }
 
   return (
 
@@ -17,7 +38,6 @@ export default function Dashboard() {
         Welcome to SalesPilot AI CRM
       </p>
 
-
       <div className="stats-container">
 
         <StatCard
@@ -28,7 +48,7 @@ export default function Dashboard() {
 
         <StatCard
           title="Customers"
-          value="1,284"
+          value={customerCount}
           icon="👥"
         />
 
@@ -46,10 +66,8 @@ export default function Dashboard() {
 
       </div>
 
-
       <SalesChart />
       <CustomerTable />
-      
 
     </div>
 
