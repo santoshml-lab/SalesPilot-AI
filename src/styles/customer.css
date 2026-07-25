@@ -64,3 +64,51 @@
   background:rgba(59,130,246,0.1);
 
 }
+
+.customer-card input{
+
+  background:#1e293b;
+
+  color:white;
+
+  border:1px solid rgba(255,255,255,0.1);
+
+  padding:12px;
+
+  border-radius:10px;
+
+  margin-right:10px;
+
+  outline:none;
+
+}
+
+.customer-card input::placeholder{
+
+  color:#94a3b8;
+
+}
+
+.customer-card button{
+
+  background:#2563eb;
+
+  color:white;
+
+  border:none;
+
+  padding:12px 20px;
+
+  border-radius:10px;
+
+  cursor:pointer;
+
+  transition:0.3s;
+
+}
+
+.customer-card button:hover{
+
+  background:#1d4ed8;
+
+}
