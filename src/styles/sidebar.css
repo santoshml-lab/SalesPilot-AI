@@ -59,3 +59,13 @@
   transform:translateX(5px);
 
 }
+
+.sidebar ul li{
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.sidebar ul li:hover{
+  color:#60a5fa;
+  transform:translateX(5px);
+}
