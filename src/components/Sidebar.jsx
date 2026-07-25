@@ -15,7 +15,9 @@ export default function Sidebar({ setPage }) {
 
         <li>📈 Leads</li>
 
-        <li>🤖 AI Assistant</li>
+        <li onClick={() => setPage("ai")}>
+      🤖 AI Assistant
+       </li>
 
         <li>📊 Analytics</li>
 
