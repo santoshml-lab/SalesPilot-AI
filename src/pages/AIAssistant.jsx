@@ -48,7 +48,10 @@ Best Regards`
 
   return (
 
-    <div className="customers-page">
+    <div
+  className="customers-page"
+  style={{ marginTop: "80px" }}
+>
 
       <h1>🤖 AI Sales Assistant</h1>
 
