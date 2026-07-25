@@ -8,6 +8,7 @@ import AddDeal from "./pages/AddDeal";
 
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
+import AIAssistant from "./pages/AIAssistant";
 
 export default function App() {
 
@@ -33,6 +34,7 @@ export default function App() {
         {page === "dashboard" && <Dashboard />}
         {page === "deals" && <Deals setPage={setPage} />}
         {page === "addDeal" && <AddDeal setPage={setPage} />}
+        {page === "ai" && <AIAssistant />}
 
       </div>
 
