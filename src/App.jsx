@@ -2,10 +2,11 @@ import { useState } from "react";
 
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Dashboard from "./pages/Dashboard";
+import Deals from "./pages/Deals";
 
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
-import Dashboard from "./pages/Dashboard";
 
 export default function App() {
 
@@ -21,11 +22,16 @@ export default function App() {
 
   return (
     <div style={{ display: "flex" }}>
-      <Sidebar />
+
+      <Sidebar setPage={setPage} />
 
       <div style={{ flex: 1 }}>
+
         <Navbar />
-        <Dashboard />
+
+        {page === "dashboard" && <Dashboard />}
+        {page === "deals" && <Deals />}
+
       </div>
 
     </div>
