@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Deals from "./pages/Deals";
+import AddDeal from "./pages/AddDeal";
 
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
@@ -30,7 +31,8 @@ export default function App() {
         <Navbar />
 
         {page === "dashboard" && <Dashboard />}
-        {page === "deals" && <Deals />}
+        {page === "deals" && <Deals setPage={setPage} />}
+        {page === "addDeal" && <AddDeal setPage={setPage} />}
 
       </div>
 
