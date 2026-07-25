@@ -11,10 +11,12 @@ export default function Dashboard() {
   const [customerCount, setCustomerCount] = useState(0);
   const [dealCount, setDealCount] = useState(0);
   const [revenue, setRevenue] = useState(0);
+  const [conversion, setConversion] = useState("0%");
 
   useEffect(() => {
     loadCustomerCount();
     loadDeals();
+    loadConversion();
   }, []);
 
   async function loadCustomerCount() {
@@ -22,52 +24,59 @@ export default function Dashboard() {
       .from("customers")
       .select("*", { count: "exact", head: true });
 
-    if (error) {
-      console.error(error);
-    } else {
+    if (!error) {
       setCustomerCount(count);
     }
   }
 
   async function loadDeals() {
 
-  const { data, error } = await supabase
-    .from("deals")
-    .select("*");
+    const { data, error } = await supabase
+      .from("deals")
+      .select("*");
 
-  console.log("Deals:", data);
-  console.log("Error:", error);
+    if (error) {
+      console.error(error);
+      return;
+    }
 
-  if (error) {
-    alert(error.message);
-    return;
+    setDealCount(data.length);
+
+    const totalRevenue = data.reduce((sum, deal) => {
+      return deal.status === "Won"
+        ? sum + Number(deal.amount)
+        : sum;
+    }, 0);
+
+    setRevenue(totalRevenue);
   }
 
-  alert(JSON.stringify(data));
+  async function loadConversion() {
 
-  setDealCount(data.length);
+    const { count: leadCount } = await supabase
+      .from("leads")
+      .select("*", { count: "exact", head: true });
 
-  const totalRevenue = data.reduce((sum, deal) => {
-    return deal.status === "Won"
-      ? sum + Number(deal.amount)
-      : sum;
-  }, 0);
+    const { count: wonDeals } = await supabase
+      .from("deals")
+      .select("*", { count: "exact", head: true })
+      .eq("status", "Won");
 
-  setRevenue(totalRevenue);
+    if (leadCount > 0) {
+      const percent = ((wonDeals / leadCount) * 100).toFixed(1);
+      setConversion(`${percent}%`);
+    } else {
+      setConversion("0%");
+    }
   }
-
 
   return (
 
     <div className="dashboard">
 
-      <h1>
-        Sales Dashboard
-      </h1>
+      <h1>Sales Dashboard</h1>
 
-      <p>
-        Welcome to SalesPilot AI CRM
-      </p>
+      <p>Welcome to SalesPilot AI CRM</p>
 
       <div className="stats-container">
 
@@ -91,13 +100,14 @@ export default function Dashboard() {
 
         <StatCard
           title="Conversion"
-          value="31%"
+          value={conversion}
           icon="📈"
         />
 
       </div>
 
       <SalesChart />
+
       <CustomerTable />
 
     </div>
