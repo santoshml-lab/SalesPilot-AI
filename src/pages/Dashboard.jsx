@@ -31,23 +31,31 @@ export default function Dashboard() {
 
   async function loadDeals() {
 
-    const { data, error } = await supabase
-      .from("deals")
-      .select("*");
+  const { data, error } = await supabase
+    .from("deals")
+    .select("*");
 
-    if (error) {
-      console.error(error);
-      return;
-    }
+  console.log("Deals:", data);
+  console.log("Error:", error);
 
-    setDealCount(data.length);
-
-    const totalRevenue = data
-      .filter(deal => deal.status === "Won")
-      .reduce((sum, deal) => sum + Number(deal.amount), 0);
-
-    setRevenue(totalRevenue);
+  if (error) {
+    alert(error.message);
+    return;
   }
+
+  alert(JSON.stringify(data));
+
+  setDealCount(data.length);
+
+  const totalRevenue = data.reduce((sum, deal) => {
+    return deal.status === "Won"
+      ? sum + Number(deal.amount)
+      : sum;
+  }, 0);
+
+  setRevenue(totalRevenue);
+  }
+
 
   return (
 
