@@ -54,13 +54,25 @@ export default function CustomerTable() {
     }
   }
 
+  async function deleteCustomer(id) {
+
+    const { error } = await supabase
+      .from("customers")
+      .delete()
+      .eq("id", id);
+
+    if (error) {
+      console.error(error);
+    } else {
+      fetchCustomers();
+    }
+  }
+
   return (
 
     <div className="customer-card">
 
-      <h2>
-        Recent Customers
-      </h2>
+      <h2>Recent Customers</h2>
 
       <div style={{ marginBottom: "20px" }}>
 
@@ -69,7 +81,6 @@ export default function CustomerTable() {
           placeholder="Customer Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          style={{ marginRight: "10px", padding: "10px" }}
         />
 
         <input
@@ -77,7 +88,6 @@ export default function CustomerTable() {
           placeholder="Company"
           value={company}
           onChange={(e) => setCompany(e.target.value)}
-          style={{ marginRight: "10px", padding: "10px" }}
         />
 
         <input
@@ -85,7 +95,6 @@ export default function CustomerTable() {
           placeholder="Status"
           value={status}
           onChange={(e) => setStatus(e.target.value)}
-          style={{ marginRight: "10px", padding: "10px" }}
         />
 
         <button onClick={addCustomer}>
@@ -102,6 +111,7 @@ export default function CustomerTable() {
             <th>Name</th>
             <th>Company</th>
             <th>Status</th>
+            <th>Action</th>
           </tr>
 
         </thead>
@@ -113,10 +123,16 @@ export default function CustomerTable() {
             <tr key={customer.id}>
 
               <td>{customer.name}</td>
-
               <td>{customer.company}</td>
-
               <td>{customer.status}</td>
+
+              <td>
+                <button
+                  onClick={() => deleteCustomer(customer.id)}
+                >
+                  Delete
+                </button>
+              </td>
 
             </tr>
 
