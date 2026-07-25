@@ -9,9 +9,12 @@ import CustomerTable from "../components/CustomerTable";
 export default function Dashboard() {
 
   const [customerCount, setCustomerCount] = useState(0);
+  const [dealCount, setDealCount] = useState(0);
+  const [revenue, setRevenue] = useState(0);
 
   useEffect(() => {
     loadCustomerCount();
+    loadDeals();
   }, []);
 
   async function loadCustomerCount() {
@@ -24,6 +27,26 @@ export default function Dashboard() {
     } else {
       setCustomerCount(count);
     }
+  }
+
+  async function loadDeals() {
+
+    const { data, error } = await supabase
+      .from("deals")
+      .select("*");
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    setDealCount(data.length);
+
+    const totalRevenue = data
+      .filter(deal => deal.status === "Won")
+      .reduce((sum, deal) => sum + Number(deal.amount), 0);
+
+    setRevenue(totalRevenue);
   }
 
   return (
@@ -42,7 +65,7 @@ export default function Dashboard() {
 
         <StatCard
           title="Revenue"
-          value="₹2,45,000"
+          value={`₹${revenue.toLocaleString("en-IN")}`}
           icon="💰"
         />
 
@@ -54,7 +77,7 @@ export default function Dashboard() {
 
         <StatCard
           title="Deals"
-          value="68"
+          value={dealCount}
           icon="💼"
         />
 
