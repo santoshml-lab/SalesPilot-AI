@@ -104,7 +104,7 @@ export default function CustomerTable() {
 
       </div>
 
-      <div
+      
 
      <div
   style={{
