@@ -5,6 +5,7 @@ import "../styles/customers.css";
 export default function Deals() {
 
   const [deals, setDeals] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     fetchDeals();
@@ -24,6 +25,21 @@ export default function Deals() {
 
   }
 
+  async function deleteDeal(id) {
+
+    const { error } = await supabase
+      .from("deals")
+      .delete()
+      .eq("id", id);
+
+    if (error) {
+      console.error(error);
+    } else {
+      fetchDeals();
+    }
+
+  }
+
   return (
 
     <div className="customers-page">
@@ -36,6 +52,18 @@ export default function Deals() {
 
       </div>
 
+      <div style={{ marginBottom: "20px" }}>
+
+        <input
+          className="search-box-customer"
+          type="text"
+          placeholder="🔍 Search Client..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+
+      </div>
+
       <table className="customers-table">
 
         <thead>
@@ -44,27 +72,38 @@ export default function Deals() {
             <th>Client</th>
             <th>Amount</th>
             <th>Status</th>
+            <th>Action</th>
           </tr>
 
         </thead>
 
         <tbody>
 
-          {deals.map((deal) => (
+          {deals
+            .filter((deal) =>
+              deal.client.toLowerCase().includes(search.toLowerCase())
+            )
+            .map((deal) => (
 
-            <tr key={deal.id}>
+              <tr key={deal.id}>
 
-              <td>{deal.client}</td>
+                <td>{deal.client}</td>
 
-              <td>
-                ₹{Number(deal.amount).toLocaleString("en-IN")}
-              </td>
+                <td>
+                  ₹{Number(deal.amount).toLocaleString("en-IN")}
+                </td>
 
-              <td>{deal.status}</td>
+                <td>{deal.status}</td>
 
-            </tr>
+                <td>
+                  <button onClick={() => deleteDeal(deal.id)}>
+                    Delete
+                  </button>
+                </td>
 
-          ))}
+              </tr>
+
+            ))}
 
         </tbody>
 
