@@ -106,11 +106,13 @@ export default function CustomerTable() {
 
       <input
   type="text"
-  placeholder="Search by Name or Company..."
-  value={search}
-  onChange={(e) => setSearch(e.target.value)}
-  className="search-box-customer"
+  onClick={() => alert("Input clicked")}
+  onFocus={() => alert("Focused")}
+  placeholder="Search..."
 />
+  
+  
+  
   
   
   
