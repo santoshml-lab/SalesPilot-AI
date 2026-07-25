@@ -6,6 +6,10 @@ export default function CustomerTable() {
 
   const [customers, setCustomers] = useState([]);
 
+  const [name, setName] = useState("");
+  const [company, setCompany] = useState("");
+  const [status, setStatus] = useState("");
+
   useEffect(() => {
     fetchCustomers();
   }, []);
@@ -22,6 +26,34 @@ export default function CustomerTable() {
     }
   }
 
+  async function addCustomer() {
+
+    if (!name || !company || !status) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    const { error } = await supabase
+      .from("customers")
+      .insert([
+        {
+          name,
+          company,
+          status,
+        },
+      ]);
+
+    if (error) {
+      console.error(error);
+    } else {
+      setName("");
+      setCompany("");
+      setStatus("");
+
+      fetchCustomers();
+    }
+  }
+
   return (
 
     <div className="customer-card">
@@ -29,6 +61,38 @@ export default function CustomerTable() {
       <h2>
         Recent Customers
       </h2>
+
+      <div style={{ marginBottom: "20px" }}>
+
+        <input
+          type="text"
+          placeholder="Customer Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          style={{ marginRight: "10px", padding: "10px" }}
+        />
+
+        <input
+          type="text"
+          placeholder="Company"
+          value={company}
+          onChange={(e) => setCompany(e.target.value)}
+          style={{ marginRight: "10px", padding: "10px" }}
+        />
+
+        <input
+          type="text"
+          placeholder="Status"
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          style={{ marginRight: "10px", padding: "10px" }}
+        />
+
+        <button onClick={addCustomer}>
+          Add Customer
+        </button>
+
+      </div>
 
       <table className="customer-table">
 
