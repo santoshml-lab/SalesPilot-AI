@@ -104,6 +104,18 @@ export default function CustomerTable() {
 
       </div>
 
+      <input
+        type="text"
+        placeholder="🔍 Search by Name or Company..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        style={{
+          width: "100%",
+          padding: "12px",
+          marginBottom: "20px"
+        }}
+      />
+
       <table className="customer-table">
 
         <thead>
@@ -119,25 +131,32 @@ export default function CustomerTable() {
 
         <tbody>
 
-          {customers.map((customer) => (
+          {customers
+            .filter((customer) =>
+              customer.name.toLowerCase().includes(search.toLowerCase()) ||
+              customer.company.toLowerCase().includes(search.toLowerCase())
+            )
+            .map((customer) => (
 
-            <tr key={customer.id}>
+              <tr key={customer.id}>
 
-              <td>{customer.name}</td>
-              <td>{customer.company}</td>
-              <td>{customer.status}</td>
+                <td>{customer.name}</td>
 
-              <td>
-                <button
-                  onClick={() => deleteCustomer(customer.id)}
-                >
-                  Delete
-                </button>
-              </td>
+                <td>{customer.company}</td>
 
-            </tr>
+                <td>{customer.status}</td>
 
-          ))}
+                <td>
+                  <button
+                    onClick={() => deleteCustomer(customer.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+
+              </tr>
+
+            ))}
 
         </tbody>
 
