@@ -104,12 +104,30 @@ export default function CustomerTable() {
 
       </div>
 
-      <input
-  type="text"
-  onClick={() => alert("Input clicked")}
-  onFocus={() => alert("Focused")}
-  placeholder="Search..."
-/>
+      <div
+  style={{
+    position: "relative",
+    zIndex: 999999,
+    background: "red",
+    padding: "10px"
+  }}
+>
+  <input
+    type="text"
+    placeholder="Search..."
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+    style={{
+      width: "100%",
+      padding: "12px"
+    }}
+  />
+</div>
+  
+  
+  
+  
+
   
   
   
