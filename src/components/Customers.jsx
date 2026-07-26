@@ -102,65 +102,92 @@ export default function Customers({
 
       <table className="customer-table">
 
-        <thead>
-  <tr>
-    <th>Name</th>
-    <th>Company</th>
-    <th>Email</th>
-    <th>Phone</th>
-    <th>City</th>
-    <th>Type</th>
-    <th>Status</th>
-    <th>Action</th>
-  </tr>
-</thead>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Company</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>City</th>
+      <th>Type</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
 
- <td>{customer.name}</td>
-<td>{customer.company}</td>
-<td>{customer.email}</td>
-<td>{customer.phone}</td>
-<td>{customer.city}</td>
-<td>{customer.customer_type}</td>
-<td>{customer.status}</td>
+  <tbody>
 
-<td>
-  <button
-    onClick={() => {
-      setSelectedCustomer(customer);
-      setPage("addCustomer");
-    }}
-    style={{
-      background: "#f59e0b",
-      color: "white",
-      border: "none",
-      padding: "8px 14px",
-      borderRadius: "6px",
-      cursor: "pointer",
-      fontWeight: "bold"
-    }}
-  >
-    Edit
-  </button>
+    {customers
+      .filter(
+        (customer) =>
+          customer.name.toLowerCase().includes(search.toLowerCase()) ||
+          customer.company.toLowerCase().includes(search.toLowerCase())
+      )
+      .map((customer) => (
 
-  <button
-    onClick={() => deleteCustomer(customer.id)}
-    style={{
-      marginLeft: "10px",
-      background: "#ef4444",
-      color: "white",
-      border: "none",
-      padding: "8px 14px",
-      borderRadius: "6px",
-      cursor: "pointer",
-      fontWeight: "bold"
-    }}
-  >
-    Delete
-  </button>
-</td>
-      </tbody>     
-              
-      </table>
+        <tr key={customer.id}>
+
+          <td>{customer.name}</td>
+          <td>{customer.company}</td>
+          <td>{customer.email}</td>
+          <td>{customer.phone}</td>
+          <td>{customer.city}</td>
+          <td>{customer.customer_type}</td>
+          <td>{customer.status}</td>
+
+          <td>
+
+            <button
+              onClick={() => {
+                setSelectedCustomer(customer);
+                setPage("addCustomer");
+              }}
+              style={{
+                background: "#f59e0b",
+                color: "white",
+                border: "none",
+                padding: "8px 14px",
+                borderRadius: "6px",
+                cursor: "pointer",
+                fontWeight: "bold"
+              }}
+            >
+              Edit
+            </button>
+
+            <button
+              onClick={() => deleteCustomer(customer.id)}
+              style={{
+                marginLeft: "10px",
+                background: "#ef4444",
+                color: "white",
+                border: "none",
+                padding: "8px 14px",
+                borderRadius: "6px",
+                cursor: "pointer",
+                fontWeight: "bold"
+              }}
+            >
+              Delete
+            </button>
+
+          </td>
+
+        </tr>
+
+      ))}
+
+  </tbody>
+
+</table>
+
+        
+    
+    
+
+    
+    
+     
                   
           
       
