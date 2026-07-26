@@ -77,13 +77,18 @@ export default function Navbar({ setPage }) {
                 
 
         <span
-          style={{
-            fontWeight: "bold",
-            fontSize: "16px",
-          }}
-        >
-          👤 Admin
-        </span>
+  onClick={() => setPage("profile")}
+  style={{ cursor: "pointer", fontWeight: "bold" }}
+>
+  👤 Admin
+</span>
+          
+            
+            
+          
+        
+        
+        
 
       </div>
 
