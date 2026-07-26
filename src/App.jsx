@@ -16,6 +16,7 @@ import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import Leads from "./pages/Leads";
 import AddLead from "./pages/AddLead";
+import Analytics from "./pages/Analytics";
 
 export default function App() {
 
@@ -89,6 +90,7 @@ export default function App() {
 )}
 
         {page === "ai" && <AIAssistant />}
+        {page === "analytics" && <Analytics />}
 
       </div>
 
