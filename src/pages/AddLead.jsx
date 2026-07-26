@@ -13,16 +13,34 @@ export default function AddLead({
   const [source, setSource] = useState("Website");
   const [status, setStatus] = useState("New");
   const [score, setScore] = useState(50);
+  const [email, setEmail] = useState("");
+const [phone, setPhone] = useState("");
+const [followUpDate, setFollowUpDate] = useState("");
+const [assignedTo, setAssignedTo] = useState("");
+const [notes, setNotes] = useState("");
 
   useEffect(() => {
-    if (selectedLead) {
-      setName(selectedLead.name || "");
-      setCompany(selectedLead.company || "");
-      setSource(selectedLead.source || "Website");
-      setStatus(selectedLead.status || "New");
-      setScore(selectedLead.score || 50);
-    }
-  }, [selectedLead]);
+  if (selectedLead) {
+    setName(selectedLead.name || "");
+    setCompany(selectedLead.company || "");
+    setEmail(selectedLead.email || "");
+    setPhone(selectedLead.phone || "");
+    setSource(selectedLead.source || "Website");
+    setStatus(selectedLead.status || "New");
+    setScore(selectedLead.score || 50);
+    setFollowUpDate(selectedLead.follow_up_date || "");
+    setAssignedTo(selectedLead.assigned_to || "");
+    setNotes(selectedLead.notes || "");
+  }
+}, [selectedLead]);
+  
+    
+      
+      
+      
+      
+    
+  
 
   async function saveLead() {
 
