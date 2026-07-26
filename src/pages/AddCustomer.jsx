@@ -139,8 +139,10 @@ export default function AddCustomer({
           {selectedCustomer ? "Update Customer" : "Save Customer"}
         </button>
 
-      </div>
+            </div>
 
     </div>
   );
-    }
+}
+
+    
