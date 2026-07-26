@@ -61,13 +61,31 @@ export default function Leads({
         <h1>📈 Leads</h1>
 
         <button
-          onClick={() => {
-            setSelectedLead(null);
-            setPage("addLead");
-          }}
-        >
-          + Add Lead
-        </button>
+  onClick={() => {
+    setSelectedLead(null);
+    setPage("addLead");
+  }}
+  style={{
+    background: "#2563eb",
+    color: "white",
+    border: "none",
+    padding: "12px 20px",
+    borderRadius: "10px",
+    cursor: "pointer",
+    fontWeight: "bold"
+  }}
+>
+  + Add Lead
+</button>
+        
+          
+            
+            
+
+              
+          
+        
+          
 
       </div>
 
@@ -112,20 +130,50 @@ export default function Leads({
                 <td>
 
                   <button
-                    onClick={() => {
-                      setSelectedLead(lead);
-                      setPage("addLead");
-                    }}
-                  >
-                    Edit
-                  </button>
+  onClick={() => {
+    setSelectedLead(lead);
+    setPage("addLead");
+  }}
+  style={{
+    background: "#f59e0b",
+    color: "white",
+    border: "none",
+    padding: "8px 14px",
+    borderRadius: "6px",
+    cursor: "pointer",
+    fontWeight: "bold"
+  }}
+>
+  Edit
+</button>
+                    
+                      
+                      
+                    
+                  
+                    
+                  
 
                   <button
-                    style={{ marginLeft: "10px" }}
-                    onClick={() => deleteLead(lead.id)}
-                  >
-                    Delete
-                  </button>
+  onClick={() => deleteLead(lead.id)}
+  style={{
+    marginLeft: "10px",
+    background: "#ef4444",
+    color: "white",
+    border: "none",
+    padding: "8px 14px",
+    borderRadius: "6px",
+    cursor: "pointer",
+    fontWeight: "bold"
+  }}
+>
+  Delete
+</button>
+                    
+                    
+                  
+                    
+                  
 
                 </td>
 
