@@ -7,7 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import Deals from "./pages/Deals";
 import AddDeal from "./pages/AddDeal";
 
-import Customers from "./pages/Customers";
+import Customers from "./components/Customers";
 import AddCustomer from "./pages/AddCustomer";
 
 import AIAssistant from "./pages/AIAssistant";
