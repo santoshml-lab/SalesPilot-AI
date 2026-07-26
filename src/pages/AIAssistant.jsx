@@ -56,21 +56,17 @@ export default function AIAssistant() {
       style={{ marginTop: "80px" }}
     >
 
-      <h1>🤖 AI Sales Assistant</h1>
+      <h1>🤖 SalesPilot AI Assistant</h1>
 
-      <p
-        style={{
-          color: "#94a3b8",
-          marginBottom: "20px",
-        }}
-      >
-        Ask AI to generate emails, sales pitches, follow-ups and more.
-      </p>
+<p style={{ color:"#94a3b8", marginBottom:"20px", fontSize:"16px" }}>
+  Your intelligent AI assistant for sales, customer engagement, lead management, deal insights, email writing, follow-ups, and business growth.
+</p>     
+          
 
       <textarea
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
-        placeholder="Ask AI anything..."
+        placeholder="Ask about sales, customers, emails, follow-ups, lead scoring, deals, business strategy..."
         style={{
           width: "100%",
           height: "180px",
@@ -95,7 +91,7 @@ export default function AIAssistant() {
           cursor: "pointer",
         }}
       >
-        {loading ? "Generating..." : "Generate"}
+        {loading ? "Thinking..." : "Generate AI Response"}
       </button>
 
       {response && (
