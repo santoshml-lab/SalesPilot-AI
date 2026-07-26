@@ -177,9 +177,16 @@ export default function Customers({
 
       ))}
 
-  </tbody>
+          </tbody>
 
-</table>
+      </table>
+
+    </div>
+
+  );
+}
+
+
 
         
     
