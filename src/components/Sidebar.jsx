@@ -37,6 +37,9 @@ export default function Sidebar({ setPage }) {
         <li onClick={() => setPage("notifications")}>
   🔔 Notifications
 </li>
+        <li onClick={() => setPage("reports")}>
+  📄 Reports
+</li>
           
         
 
