@@ -43,7 +43,7 @@ export default function App() {
 
       <div style={{ flex: 1 }}>
 
-        <Navbar />
+        <Navbar setPage={setPage} />
 
         {page === "dashboard" && <Dashboard />}
 
