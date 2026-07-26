@@ -5,14 +5,15 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Deals from "./pages/Deals";
 import AddDeal from "./pages/AddDeal";
+import AIAssistant from "./pages/AIAssistant";
 
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
-import AIAssistant from "./pages/AIAssistant";
 
 export default function App() {
 
   const [page, setPage] = useState("login");
+  const [selectedDeal, setSelectedDeal] = useState(null);
 
   if (page === "login") {
     return <Login setPage={setPage} />;
@@ -32,8 +33,22 @@ export default function App() {
         <Navbar />
 
         {page === "dashboard" && <Dashboard />}
-        {page === "deals" && <Deals setPage={setPage} />}
-        {page === "addDeal" && <AddDeal setPage={setPage} />}
+
+        {page === "deals" && (
+          <Deals
+            setPage={setPage}
+            setSelectedDeal={setSelectedDeal}
+          />
+        )}
+
+        {page === "addDeal" && (
+          <AddDeal
+            setPage={setPage}
+            selectedDeal={selectedDeal}
+            setSelectedDeal={setSelectedDeal}
+          />
+        )}
+
         {page === "ai" && <AIAssistant />}
 
       </div>
