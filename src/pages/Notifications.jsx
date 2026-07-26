@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
-import "../styles/customers.css";
+import "../styles/notifications.css";
 
 export default function Notifications() {
 
@@ -15,59 +15,85 @@ export default function Notifications() {
     const { data, error } = await supabase
       .from("leads")
       .select("*")
-      .order("id", { ascending: false });
+      .order("follow_up_date", { ascending: true });
 
     if (error) {
       alert(error.message);
-      return;
+    } else {
+      setNotifications(data || []);
     }
 
-    setNotifications(data || []);
   }
 
   const today = new Date().toISOString().split("T")[0];
 
   return (
+
     <div
-      className="customers-page"
-      style={{ marginTop: "90px", padding: "30px" }}
+      style={{
+        marginTop: "90px",
+        padding: "30px",
+      }}
     >
 
-      <h1>🔔 Notifications</h1>
+      <h1 style={{ color: "white", marginBottom: "25px" }}>
+        🔔 Notifications Center
+      </h1>
 
       {notifications.length === 0 ? (
-        <h3>No Notifications</h3>
+
+        <div className="notification-card">
+          <h3>No Notifications 🎉</h3>
+        </div>
+
       ) : (
 
         notifications.map((lead) => (
 
           <div
             key={lead.id}
-            style={{
-              background: "#111827",
-              color: "white",
-              padding: "18px",
-              marginBottom: "15px",
-              borderRadius: "12px",
-              borderLeft: "5px solid #2563eb",
-            }}
+            className="notification-card"
           >
 
-            {lead.follow_up_date < today && (
-              <p>🔴 <b>Overdue Follow-up</b> — {lead.name}</p>
-            )}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
 
-            {lead.follow_up_date === today && (
-              <p>🟡 <b>Today's Follow-up</b> — {lead.name}</p>
-            )}
+              <h3 className="notification-title">
 
-            {lead.status === "New" && (
-              <p>🔵 <b>New Lead</b> — {lead.name}</p>
-            )}
+                {lead.follow_up_date < today
+                  ? "🔴 Overdue Follow-up"
+                  : lead.follow_up_date === today
+                  ? "🟡 Today's Follow-up"
+                  : "🟢 Upcoming Follow-up"}
 
-            {lead.status === "Won" && (
-              <p>🟢 <b>Deal Won</b> — {lead.name}</p>
-            )}
+              </h3>
+
+              <span className="notification-badge">
+                {lead.status}
+              </span>
+
+            </div>
+
+            <p><b>👤 Lead:</b> {lead.name}</p>
+
+            <p><b>🏢 Company:</b> {lead.company}</p>
+
+            <p><b>📞 Phone:</b> {lead.phone}</p>
+
+            <p><b>📅 Follow-up:</b> {lead.follow_up_date}</p>
+
+            <p><b>👨‍💼 Assigned To:</b> {lead.assigned_to}</p>
+
+            <p><b>📝 Notes:</b> {lead.notes}</p>
+
+            <p className="notification-time">
+              🕒 Auto Generated Notification
+            </p>
 
           </div>
 
@@ -76,5 +102,7 @@ export default function Notifications() {
       )}
 
     </div>
+
   );
+
 }
