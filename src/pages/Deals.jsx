@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import "../styles/customers.css";
 
-export default function Deals({ setPage }) {
+export default function Deals({ setPage, setSelectedDeal }) {
 
   const [deals, setDeals] = useState([]);
   const [search, setSearch] = useState("");
@@ -121,18 +121,25 @@ export default function Deals({ setPage }) {
                 <td>
 
                   <button
-                    style={{
-                      background: "#f59e0b",
-                      color: "white",
-                      border: "none",
-                      padding: "8px 14px",
-                      borderRadius: "6px",
-                      cursor: "pointer",
-                      fontWeight: "bold"
-                    }}
-                  >
-                    Edit
-                  </button>
+  onClick={() => {
+    setSelectedDeal(deal);
+    setPage("addDeal");
+  }}
+  style={{
+    background: "#f59e0b",
+    color: "white",
+    border: "none",
+    padding: "8px 14px",
+    borderRadius: "6px",
+    cursor: "pointer",
+    fontWeight: "bold"
+  }}
+>
+  Edit
+</button>
+                    
+                                      
+                    
 
                   <button
                     onClick={() => deleteDeal(deal.id)}
