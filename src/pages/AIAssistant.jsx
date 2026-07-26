@@ -1,53 +1,59 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styles/customers.css";
 
-export default function AIAssistant() {
+async function generateAI(customPrompt = null) {
 
-  const [prompt, setPrompt] = useState("");
-  const [response, setResponse] = useState("");
-  const [loading, setLoading] = useState(false);
+  const finalPrompt = customPrompt || prompt;
 
-  async function generateAI() {
-
-    if (!prompt.trim()) {
-      alert("Please enter a prompt");
-      return;
-    }
-
-    try {
-
-      setLoading(true);
-      setResponse("");
-
-      const res = await fetch(
-        "https://salespilot-l1d3.onrender.com/chat",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            prompt: prompt,
-          }),
-        }
-      );
-
-      const data = await res.json();
-
-      if (res.ok) {
-        setResponse(data.response);
-      } else {
-        setResponse(data.detail || "Something went wrong.");
-      }
-
-    } catch (error) {
-      console.error(error);
-      setResponse("Unable to connect to AI server.");
-    } finally {
-      setLoading(false);
-    }
-
+  if (!finalPrompt.trim()) {
+    alert("Please enter a prompt");
+    return;
   }
+
+  try {
+
+    setLoading(true);
+    setResponse("");
+
+    const res = await fetch(
+      "https://salespilot-l1d3.onrender.com/chat",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          prompt: finalPrompt,
+        }),
+      }
+    );
+
+    const data = await res.json();
+
+    if (res.ok) {
+      setResponse(data.response);
+    } else {
+      setResponse(data.detail || "Something went wrong.");
+    }
+
+  } catch (error) {
+    console.error(error);
+    setResponse("Unable to connect to AI server.");
+  } finally {
+ setLoading(false);
+  }
+} 
+      
+      
+    
+
+    
+
+      
+      
+
+      
+          
 
   return (
 
