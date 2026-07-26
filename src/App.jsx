@@ -14,6 +14,8 @@ import AIAssistant from "./pages/AIAssistant";
 
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
+import Leads from "./pages/Leads";
+import AddLead from "./pages/AddLead";
 
 export default function App() {
 
@@ -21,6 +23,7 @@ export default function App() {
 
   const [selectedDeal, setSelectedDeal] = useState(null);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
+  const [selectedLead, setSelectedLead] = useState(null);
 
   if (page === "login") {
     return <Login setPage={setPage} />;
@@ -70,6 +73,20 @@ export default function App() {
             setSelectedCustomer={setSelectedCustomer}
           />
         )}
+        {page === "leads" && (
+  <Leads
+    setPage={setPage}
+    setSelectedLead={setSelectedLead}
+  />
+)}
+
+{page === "addLead" && (
+  <AddLead
+    setPage={setPage}
+    selectedLead={selectedLead}
+    setSelectedLead={setSelectedLead}
+  />
+)}
 
         {page === "ai" && <AIAssistant />}
 
