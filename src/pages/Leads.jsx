@@ -146,7 +146,36 @@ export default function Leads({
 >
   Edit
 </button>
-                    
+                  
+  <button
+  onClick={() => {
+    const prompt = `
+Lead Name: ${lead.name}
+Company: ${lead.company}
+Status: ${lead.status}
+Score: ${lead.score}
+
+Analyze this lead and give:
+1. Conversion probability
+2. Next best action
+3. Follow-up strategy
+`;
+    setPage("ai");
+    localStorage.setItem("aiPrompt", prompt);
+  }}
+  style={{
+    marginLeft: "10px",
+    background: "#3b82f6",
+    color: "white",
+    border: "none",
+    padding: "8px 14px",
+    borderRadius: "6px",
+    cursor: "pointer",
+    fontWeight: "bold"
+  }}
+>
+  🤖 AI
+</button>                  
                       
                       
                     
