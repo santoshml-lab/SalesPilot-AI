@@ -7,21 +7,34 @@ export default function Sidebar({ setPage }) {
       <h2>🚀 SalesPilot AI</h2>
 
       <ul>
-        <li onClick={() => setPage("dashboard")}>🏠 Dashboard</li>
 
-        <li onClick={() => setPage("deals")}>💼 Deals</li>
+        <li onClick={() => setPage("dashboard")}>
+          🏠 Dashboard
+        </li>
 
-        <li>👥 Customers</li>
+        <li onClick={() => setPage("customers")}>
+          👥 Customers
+        </li>
 
-        <li>📈 Leads</li>
+        <li onClick={() => setPage("deals")}>
+          💼 Deals
+        </li>
+
+        <li onClick={() => setPage("leads")}>
+          📈 Leads
+        </li>
 
         <li onClick={() => setPage("ai")}>
-      🤖 AI Assistant
-       </li>
+          🤖 AI Assistant
+        </li>
 
-        <li>📊 Analytics</li>
+        <li onClick={() => setPage("analytics")}>
+          📊 Analytics
+        </li>
 
-        <li>⚙️ Settings</li>
+        <li onClick={() => setPage("settings")}>
+          ⚙️ Settings
+        </li>
 
       </ul>
 
