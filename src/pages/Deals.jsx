@@ -14,16 +14,25 @@ export default function Deals({ setPage }) {
   async function fetchDeals() {
     const { data, error } = await supabase
       .from("deals")
-      .select("*");
+      .select("*")
+      .order("id", { ascending: false });
 
     if (error) {
       console.error(error);
+      alert(error.message);
     } else {
       setDeals(data);
     }
   }
 
   async function deleteDeal(id) {
+
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this deal?"
+    );
+
+    if (!confirmDelete) return;
+
     const { error } = await supabase
       .from("deals")
       .delete()
@@ -31,7 +40,9 @@ export default function Deals({ setPage }) {
 
     if (error) {
       console.error(error);
+      alert(error.message);
     } else {
+      alert("Deal deleted successfully");
       fetchDeals();
     }
   }
@@ -50,6 +61,7 @@ export default function Deals({ setPage }) {
           marginBottom: "25px"
         }}
       >
+
         <h1>💼 Deals</h1>
 
         <button
@@ -60,11 +72,13 @@ export default function Deals({ setPage }) {
             border: "none",
             padding: "12px 20px",
             borderRadius: "10px",
-            cursor: "pointer"
+            cursor: "pointer",
+            fontWeight: "bold"
           }}
         >
           + Add Deal
         </button>
+
       </div>
 
       <input
@@ -93,6 +107,7 @@ export default function Deals({ setPage }) {
               deal.client.toLowerCase().includes(search.toLowerCase())
             )
             .map((deal) => (
+
               <tr key={deal.id}>
 
                 <td>{deal.client}</td>
@@ -104,17 +119,41 @@ export default function Deals({ setPage }) {
                 <td>{deal.status}</td>
 
                 <td>
-                  <button>Edit</button>
 
                   <button
-                    style={{ marginLeft: "10px" }}
+                    style={{
+                      background: "#f59e0b",
+                      color: "white",
+                      border: "none",
+                      padding: "8px 14px",
+                      borderRadius: "6px",
+                      cursor: "pointer",
+                      fontWeight: "bold"
+                    }}
+                  >
+                    Edit
+                  </button>
+
+                  <button
                     onClick={() => deleteDeal(deal.id)}
+                    style={{
+                      marginLeft: "10px",
+                      background: "#ef4444",
+                      color: "white",
+                      border: "none",
+                      padding: "8px 14px",
+                      borderRadius: "6px",
+                      cursor: "pointer",
+                      fontWeight: "bold"
+                    }}
                   >
                     Delete
                   </button>
+
                 </td>
 
               </tr>
+
             ))}
 
         </tbody>
