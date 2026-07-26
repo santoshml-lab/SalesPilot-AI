@@ -10,20 +10,30 @@ export default function AddCustomer({
 
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [city, setCity] = useState("");
+  const [notes, setNotes] = useState("");
+  const [customerType, setCustomerType] = useState("Regular");
   const [status, setStatus] = useState("Active");
 
   useEffect(() => {
     if (selectedCustomer) {
-      setName(selectedCustomer.name);
-      setCompany(selectedCustomer.company);
-      setStatus(selectedCustomer.status);
+      setName(selectedCustomer.name || "");
+      setCompany(selectedCustomer.company || "");
+      setEmail(selectedCustomer.email || "");
+      setPhone(selectedCustomer.phone || "");
+      setCity(selectedCustomer.city || "");
+      setNotes(selectedCustomer.notes || "");
+      setCustomerType(selectedCustomer.customer_type || "Regular");
+      setStatus(selectedCustomer.status || "Active");
     }
   }, [selectedCustomer]);
 
   async function saveCustomer() {
 
-    if (!name || !company) {
-      alert("Please fill all fields");
+    if (!name || !company || !email || !phone || !city) {
+      alert("Please fill all required fields");
       return;
     }
 
@@ -34,6 +44,11 @@ export default function AddCustomer({
         .update({
           name,
           company,
+          email,
+          phone,
+          city,
+          notes,
+          customer_type: customerType,
           status,
         })
         .eq("id", selectedCustomer.id);
@@ -54,6 +69,11 @@ export default function AddCustomer({
           {
             name,
             company,
+            email,
+            phone,
+            city,
+            notes,
+            customer_type: customerType,
             status,
           },
         ]);
@@ -78,7 +98,7 @@ export default function AddCustomer({
 
       <div
         style={{
-          maxWidth: "500px",
+          maxWidth: "550px",
           margin: "0 auto",
           background: "#111827",
           padding: "30px",
@@ -110,15 +130,66 @@ export default function AddCustomer({
 
         <br /><br />
 
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="search-box-customer"
+        />
+
+        <br /><br />
+
+        <input
+          type="text"
+          placeholder="Phone Number"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          className="search-box-customer"
+        />
+
+        <br /><br />
+
+        <input
+          type="text"
+          placeholder="City"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          className="search-box-customer"
+        />
+
+        <br /><br />
+
+        <select
+          value={customerType}
+          onChange={(e) => setCustomerType(e.target.value)}
+          className="search-box-customer"
+        >
+          <option value="Regular">Regular</option>
+          <option value="VIP">VIP</option>
+          <option value="Premium">Premium</option>
+        </select>
+
+        <br /><br />
+
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value)}
           className="search-box-customer"
         >
-          <option>Active</option>
-          <option>Inactive</option>
-          <option>VIP</option>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
         </select>
+
+        <br /><br />
+
+        <textarea
+          placeholder="Notes"
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          className="search-box-customer"
+          rows="4"
+        />
 
         <br /><br />
 
@@ -139,7 +210,7 @@ export default function AddCustomer({
           {selectedCustomer ? "Update Customer" : "Save Customer"}
         </button>
 
-            </div>
+      </div>
 
     </div>
   );
