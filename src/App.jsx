@@ -20,6 +20,7 @@ import Analytics from "./pages/Analytics";
 import Reminders from "./pages/Reminders";
 import Notifications from "./pages/Notifications";
 import Reports from "./pages/Reports";
+import Profile from "./pages/Profile";
 
 export default function App() {
 
@@ -97,6 +98,7 @@ export default function App() {
         {page === "reminders" && <Reminders />}
         {page === "notifications" && <Notifications />}
         {page === "reports" && <Reports />}
+        {page === "profile" && <Profile />}
 
       </div>
 
