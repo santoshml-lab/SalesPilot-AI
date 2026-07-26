@@ -4,7 +4,6 @@ import { supabase } from "../lib/supabase";
 import "../styles/dashboard.css";
 import StatCard from "../components/StatCard";
 import SalesChart from "../components/SalesChart";
-import CustomerTable from "../components/CustomerTable";
 
 export default function Dashboard() {
 
@@ -30,7 +29,6 @@ export default function Dashboard() {
   }
 
   async function loadDeals() {
-
     const { data, error } = await supabase
       .from("deals")
       .select("*");
@@ -52,7 +50,6 @@ export default function Dashboard() {
   }
 
   async function loadConversion() {
-
     const { count: leadCount } = await supabase
       .from("leads")
       .select("*", { count: "exact", head: true });
@@ -71,7 +68,6 @@ export default function Dashboard() {
   }
 
   return (
-
     <div className="dashboard">
 
       <h1>Sales Dashboard</h1>
@@ -108,10 +104,6 @@ export default function Dashboard() {
 
       <SalesChart />
 
-      <CustomerTable />
-
     </div>
-
   );
-
 }
