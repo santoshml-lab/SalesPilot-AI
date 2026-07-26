@@ -29,8 +29,10 @@ export default function Sidebar({ setPage }) {
         </li>
 
         <li onClick={() => setPage("analytics")}>
-          📊 Analytics
-        </li>
+  📊 Analytics
+</li>
+          
+        
 
         <li onClick={() => setPage("settings")}>
           ⚙️ Settings
