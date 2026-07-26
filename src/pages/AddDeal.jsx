@@ -34,47 +34,72 @@ export default function AddDeal({ setPage }) {
   }
 
   return (
-    <div className="customers-page">
+  <div
+    className="customers-page"
+    style={{ marginTop: "90px", padding: "30px" }}
+  >
+    <div
+      style={{
+        maxWidth: "500px",
+        margin: "0 auto",
+        background: "#111827",
+        padding: "30px",
+        borderRadius: "15px",
+      }}
+    >
+      <h1 style={{ marginBottom: "25px" }}>💼 Add Deal</h1>
 
-      <h1>Add Deal</h1>
+      <input
+        type="text"
+        placeholder="Client Name"
+        value={client}
+        onChange={(e) => setClient(e.target.value)}
+        className="search-input"
+      />
 
-      <div style={{ marginTop: "30px" }}>
+      <br /><br />
 
-        <input
-          type="text"
-          placeholder="Client Name"
-          value={client}
-          onChange={(e) => setClient(e.target.value)}
-        />
+      <input
+        type="number"
+        placeholder="Deal Amount"
+        value={amount}
+        onChange={(e) => setAmount(e.target.value)}
+        className="search-input"
+      />
 
-        <br /><br />
+      <br /><br />
 
-        <input
-          type="number"
-          placeholder="Amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
+      <select
+        value={status}
+        onChange={(e) => setStatus(e.target.value)}
+        className="search-input"
+      >
+        <option>Pending</option>
+        <option>Won</option>
+        <option>Lost</option>
+      </select>
 
-        <br /><br />
+      <br /><br />
 
-        <select
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-        >
-          <option>Pending</option>
-          <option>Won</option>
-          <option>Lost</option>
-        </select>
-
-        <br /><br />
-
-        <button onClick={addDeal}>
-          Save Deal
-        </button>
-
-      </div>
-
+      <button
+        onClick={addDeal}
+        style={{
+          width: "100%",
+          padding: "14px",
+          background: "#2563eb",
+          color: "white",
+          border: "none",
+          borderRadius: "10px",
+          fontSize: "16px",
+          fontWeight: "bold",
+          cursor: "pointer",
+        }}
+      >
+        Save Deal
+      </button>
     </div>
-  );
-}
+  </div>
+);
+    
+
+      
