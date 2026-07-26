@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import "../styles/customer.css";
 
-export default function CustomerTable() {
+export default function Customers({
+  setPage,
+  setSelectedCustomer,
+}) {
 
   const [customers, setCustomers] = useState([]);
 
@@ -75,37 +78,34 @@ export default function CustomerTable() {
 
       <h2>Recent Customers</h2>
 
-      <div style={{ marginBottom: "20px" }}>
+      <div
+  style={{
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: "25px"
+  }}
+>
 
-        <input
-          type="text"
-          placeholder="Customer Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+  <h1>👥 Customers</h1>
 
-        <input
-          type="text"
-          placeholder="Company"
-          value={company}
-          onChange={(e) => setCompany(e.target.value)}
-        />
+  <button
+    onClick={() => setPage("addCustomer")}
+    style={{
+      background: "#2563eb",
+      color: "white",
+      border: "none",
+      padding: "12px 20px",
+      borderRadius: "10px",
+      cursor: "pointer",
+      fontWeight: "bold"
+    }}
+  >
+    + Add Customer
+  </button>
 
-        <input
-          type="text"
-          placeholder="Status"
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-        />
-
-        <button onClick={addCustomer}>
-          Add Customer
-        </button>
-
-      </div>
-
-      
-
+</div>
+               
      <div
   style={{
     position: "relative",
