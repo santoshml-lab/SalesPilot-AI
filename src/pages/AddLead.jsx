@@ -10,37 +10,29 @@ export default function AddLead({
 
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [source, setSource] = useState("Website");
   const [status, setStatus] = useState("New");
   const [score, setScore] = useState(50);
-  const [email, setEmail] = useState("");
-const [phone, setPhone] = useState("");
-const [followUpDate, setFollowUpDate] = useState("");
-const [assignedTo, setAssignedTo] = useState("");
-const [notes, setNotes] = useState("");
+  const [followUpDate, setFollowUpDate] = useState("");
+  const [assignedTo, setAssignedTo] = useState("");
+  const [notes, setNotes] = useState("");
 
   useEffect(() => {
-  if (selectedLead) {
-    setName(selectedLead.name || "");
-    setCompany(selectedLead.company || "");
-    setEmail(selectedLead.email || "");
-    setPhone(selectedLead.phone || "");
-    setSource(selectedLead.source || "Website");
-    setStatus(selectedLead.status || "New");
-    setScore(selectedLead.score || 50);
-    setFollowUpDate(selectedLead.follow_up_date || "");
-    setAssignedTo(selectedLead.assigned_to || "");
-    setNotes(selectedLead.notes || "");
-  }
-}, [selectedLead]);
-  
-    
-      
-      
-      
-      
-    
-  
+    if (selectedLead) {
+      setName(selectedLead.name || "");
+      setCompany(selectedLead.company || "");
+      setEmail(selectedLead.email || "");
+      setPhone(selectedLead.phone || "");
+      setSource(selectedLead.source || "Website");
+      setStatus(selectedLead.status || "New");
+      setScore(selectedLead.score || 50);
+      setFollowUpDate(selectedLead.follow_up_date || "");
+      setAssignedTo(selectedLead.assigned_to || "");
+      setNotes(selectedLead.notes || "");
+    }
+  }, [selectedLead]);
 
   async function saveLead() {
 
@@ -56,9 +48,14 @@ const [notes, setNotes] = useState("");
         .update({
           name,
           company,
+          email,
+          phone,
           source,
           status,
           score,
+          follow_up_date: followUpDate,
+          assigned_to: assignedTo,
+          notes,
         })
         .eq("id", selectedLead.id);
 
@@ -78,9 +75,14 @@ const [notes, setNotes] = useState("");
           {
             name,
             company,
+            email,
+            phone,
             source,
             status,
             score,
+            follow_up_date: followUpDate,
+            assigned_to: assignedTo,
+            notes,
           },
         ]);
 
@@ -92,10 +94,9 @@ const [notes, setNotes] = useState("");
       }
 
     }
-
   }
 
-  return (
+    return (
     <div
       className="customers-page"
       style={{ marginTop: "90px", padding: "30px" }}
@@ -130,23 +131,24 @@ const [notes, setNotes] = useState("");
           value={company}
           onChange={(e) => setCompany(e.target.value)}
         />
+
         <br /><br />
 
-<input
-  className="search-input"
-  placeholder="Email"
-  value={email}
-  onChange={(e) => setEmail(e.target.value)}
-/>
+        <input
+          className="search-input"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-<br /><br />
+        <br /><br />
 
-<input
-  className="search-input"
-  placeholder="Phone"
-  value={phone}
-  onChange={(e) => setPhone(e.target.value)}
-/>
+        <input
+          className="search-input"
+          placeholder="Phone"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+        />
 
         <br /><br />
 
@@ -186,33 +188,34 @@ const [notes, setNotes] = useState("");
           value={score}
           onChange={(e) => setScore(e.target.value)}
         />
+
         <br /><br />
 
-<input
-  type="date"
-  className="search-input"
-  value={followUpDate}
-  onChange={(e) => setFollowUpDate(e.target.value)}
-/>
+        <input
+          type="date"
+          className="search-input"
+          value={followUpDate}
+          onChange={(e) => setFollowUpDate(e.target.value)}
+        />
 
-<br /><br />
+        <br /><br />
 
-<input
-  className="search-input"
-  placeholder="Assigned To"
-  value={assignedTo}
-  onChange={(e) => setAssignedTo(e.target.value)}
-/>
+        <input
+          className="search-input"
+          placeholder="Assigned To"
+          value={assignedTo}
+          onChange={(e) => setAssignedTo(e.target.value)}
+        />
 
-<br /><br />
+        <br /><br />
 
-<textarea
-  className="search-input"
-  placeholder="Notes"
-  value={notes}
-  onChange={(e) => setNotes(e.target.value)}
-  rows="4"
-/>
+        <textarea
+          className="search-input"
+          placeholder="Notes"
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          rows="4"
+        />
 
         <br /><br />
 
@@ -237,3 +240,5 @@ const [notes, setNotes] = useState("");
     </div>
   );
 }
+
+  
