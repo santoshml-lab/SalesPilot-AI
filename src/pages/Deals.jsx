@@ -12,7 +12,6 @@ export default function Deals({ setPage }) {
   }, []);
 
   async function fetchDeals() {
-
     const { data, error } = await supabase
       .from("deals")
       .select("*");
@@ -22,11 +21,9 @@ export default function Deals({ setPage }) {
     } else {
       setDeals(data);
     }
-
   }
 
   async function deleteDeal(id) {
-
     const { error } = await supabase
       .from("deals")
       .delete()
@@ -37,43 +34,56 @@ export default function Deals({ setPage }) {
     } else {
       fetchDeals();
     }
-
   }
 
   return (
+    <div
+      className="customers-page"
+      style={{ marginTop: "90px", padding: "30px" }}
+    >
 
-    <div className="customers-page">
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "25px"
+        }}
+      >
+        <h1>💼 Deals</h1>
 
-      <div className="customers-header">
-
-        <h1>Deals</h1>
-
-        <button onClick={() => setPage("addDeal")}>
-  Add Deal
-</button>
-
+        <button
+          onClick={() => setPage("addDeal")}
+          style={{
+            background: "#2563eb",
+            color: "white",
+            border: "none",
+            padding: "12px 20px",
+            borderRadius: "10px",
+            cursor: "pointer"
+          }}
+        >
+          + Add Deal
+        </button>
       </div>
 
       <input
-        className="search-box-customer"
         type="text"
         placeholder="🔍 Search Client..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        style={{ marginBottom: "20px", width: "100%" }}
+        className="search-input"
       />
 
       <table className="customers-table">
 
         <thead>
-
           <tr>
             <th>Client</th>
             <th>Amount</th>
             <th>Status</th>
             <th>Action</th>
           </tr>
-
         </thead>
 
         <tbody>
@@ -83,7 +93,6 @@ export default function Deals({ setPage }) {
               deal.client.toLowerCase().includes(search.toLowerCase())
             )
             .map((deal) => (
-
               <tr key={deal.id}>
 
                 <td>{deal.client}</td>
@@ -95,10 +104,7 @@ export default function Deals({ setPage }) {
                 <td>{deal.status}</td>
 
                 <td>
-
-                  <button>
-                    Edit
-                  </button>
+                  <button>Edit</button>
 
                   <button
                     style={{ marginLeft: "10px" }}
@@ -106,11 +112,9 @@ export default function Deals({ setPage }) {
                   >
                     Delete
                   </button>
-
                 </td>
 
               </tr>
-
             ))}
 
         </tbody>
@@ -118,9 +122,7 @@ export default function Deals({ setPage }) {
       </table>
 
     </div>
-
   );
-
 }
 
 
