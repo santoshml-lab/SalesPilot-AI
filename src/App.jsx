@@ -3,18 +3,24 @@ import { useState } from "react";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
+
 import Deals from "./pages/Deals";
 import AddDeal from "./pages/AddDeal";
+
+import Customers from "./pages/Customers";
+import AddCustomer from "./pages/AddCustomer";
+
 import AIAssistant from "./pages/AIAssistant";
 
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
-import Customers from "./pages/Customers";
 
 export default function App() {
 
   const [page, setPage] = useState("login");
+
   const [selectedDeal, setSelectedDeal] = useState(null);
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
 
   if (page === "login") {
     return <Login setPage={setPage} />;
@@ -47,6 +53,21 @@ export default function App() {
             setPage={setPage}
             selectedDeal={selectedDeal}
             setSelectedDeal={setSelectedDeal}
+          />
+        )}
+
+        {page === "customers" && (
+          <Customers
+            setPage={setPage}
+            setSelectedCustomer={setSelectedCustomer}
+          />
+        )}
+
+        {page === "addCustomer" && (
+          <AddCustomer
+            setPage={setPage}
+            selectedCustomer={selectedCustomer}
+            setSelectedCustomer={setSelectedCustomer}
           />
         )}
 
