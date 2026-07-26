@@ -19,6 +19,7 @@ import AddLead from "./pages/AddLead";
 import Analytics from "./pages/Analytics";
 import Reminders from "./pages/Reminders";
 import Notifications from "./pages/Notifications";
+import Reports from "./pages/Reports";
 
 export default function App() {
 
@@ -95,6 +96,7 @@ export default function App() {
         {page === "analytics" && <Analytics />}
         {page === "reminders" && <Reminders />}
         {page === "notifications" && <Notifications />}
+        {page === "reports" && <Reports />}
 
       </div>
 
