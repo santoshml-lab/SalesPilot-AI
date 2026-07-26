@@ -9,6 +9,7 @@ import AIAssistant from "./pages/AIAssistant";
 
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
+import Customers from "./pages/Customers";
 
 export default function App() {
 
