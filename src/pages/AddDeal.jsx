@@ -19,12 +19,28 @@ export default function AddDeal({
   const [status, setStatus] = useState("Pending");
 
   async function addDeal() {
-    if (!client || !amount) {
-      alert("Please fill all fields");
-      return;
-    }
 
-    const { error } = await supabase
+  if (!client || !amount) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  let error;
+
+  if (selectedDeal) {
+
+    ({ error } = await supabase
+      .from("deals")
+      .update({
+        client,
+        amount,
+        status,
+      })
+      .eq("id", selectedDeal.id));
+
+  } else {
+
+    ({ error } = await supabase
       .from("deals")
       .insert([
         {
@@ -32,15 +48,25 @@ export default function AddDeal({
           amount,
           status,
         },
-      ]);
+      ]));
 
-    if (error) {
-      alert(error.message);
-    } else {
-      alert("Deal Added Successfully");
-      setPage("deals");
-    }
   }
+
+  if (error) {
+    alert(error.message);
+  } else {
+
+    alert(
+      selectedDeal
+        ? "Deal Updated Successfully"
+        : "Deal Added Successfully"
+    );
+
+    setSelectedDeal(null);
+    setPage("deals");
+  }
+  }
+               
 
   return (
     <div
@@ -56,7 +82,9 @@ export default function AddDeal({
           borderRadius: "15px",
         }}
       >
-        <h1 style={{ marginBottom: "25px" }}>💼 Add Deal</h1>
+        <h1 style={{ marginBottom: "25px" }}>
+  {selectedDeal ? "✏️ Edit Deal" : "💼 Add Deal"}
+</h1>
 
         <input
           type="text"
@@ -104,7 +132,7 @@ export default function AddDeal({
             cursor: "pointer",
           }}
         >
-          Save Deal
+          {selectedDeal ? "Update Deal" : "Save Deal"}
         </button>
       </div>
     </div>
