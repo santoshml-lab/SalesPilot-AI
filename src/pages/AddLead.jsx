@@ -112,6 +112,23 @@ export default function AddLead({
           value={company}
           onChange={(e) => setCompany(e.target.value)}
         />
+        <br /><br />
+
+<input
+  className="search-input"
+  placeholder="Email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+/>
+
+<br /><br />
+
+<input
+  className="search-input"
+  placeholder="Phone"
+  value={phone}
+  onChange={(e) => setPhone(e.target.value)}
+/>
 
         <br /><br />
 
@@ -151,6 +168,33 @@ export default function AddLead({
           value={score}
           onChange={(e) => setScore(e.target.value)}
         />
+        <br /><br />
+
+<input
+  type="date"
+  className="search-input"
+  value={followUpDate}
+  onChange={(e) => setFollowUpDate(e.target.value)}
+/>
+
+<br /><br />
+
+<input
+  className="search-input"
+  placeholder="Assigned To"
+  value={assignedTo}
+  onChange={(e) => setAssignedTo(e.target.value)}
+/>
+
+<br /><br />
+
+<textarea
+  className="search-input"
+  placeholder="Notes"
+  value={notes}
+  onChange={(e) => setNotes(e.target.value)}
+  rows="4"
+/>
 
         <br /><br />
 
