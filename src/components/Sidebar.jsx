@@ -34,6 +34,9 @@ export default function Sidebar({ setPage }) {
         <li onClick={() => setPage("reminders")}>
   📅 Reminders
 </li>
+        <li onClick={() => setPage("notifications")}>
+  🔔 Notifications
+</li>
           
         
 
