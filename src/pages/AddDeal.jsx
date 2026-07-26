@@ -1,9 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
 import "../styles/customers.css";
 
-export default function AddDeal({ setPage }) {
+export default function AddDeal({
+  setPage,
+  selectedDeal,
+  setSelectedDeal,
+}) {
   const [client, setClient] = useState("");
+  useEffect(() => {
+  if (selectedDeal) {
+    setClient(selectedDeal.client);
+    setAmount(selectedDeal.amount);
+    setStatus(selectedDeal.status);
+  }
+}, [selectedDeal]);
   const [amount, setAmount] = useState("");
   const [status, setStatus] = useState("Pending");
 
