@@ -22,6 +22,7 @@ import Notifications from "./pages/Notifications";
 import Reports from "./pages/Reports";
 import Profile from "./pages/Profile";
 import Calendar from "./pages/Calendar";
+import AddReminder from "./pages/AddReminder";
 
 export default function App() {
 
@@ -101,6 +102,7 @@ export default function App() {
         {page === "reports" && <Reports />}
         {page === "profile" && <Profile />}
         {page === "calendar" && <Calendar />}
+        {page === "addReminder" && <AddReminder setPage={setPage} />}
 
       </div>
 
