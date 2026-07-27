@@ -119,6 +119,55 @@ export default function Dashboard() {
       </div>
 
       <SalesChart />
+      <div
+  style={{
+    marginTop: "30px",
+    background: "#111827",
+    padding: "25px",
+    borderRadius: "15px",
+    border: "1px solid rgba(255,255,255,.08)"
+  }}
+>
+
+  <h2 style={{ marginBottom: "20px" }}>
+    🤖 AI Business Insights
+  </h2>
+
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
+      gap: "20px"
+    }}
+  >
+
+    <div style={{background:"#1e293b",padding:"20px",borderRadius:"12px"}}>
+      📈
+      <h3>Sales Growth</h3>
+      <p>Your leads are increasing steadily.</p>
+    </div>
+
+    <div style={{background:"#1e293b",padding:"20px",borderRadius:"12px"}}>
+      🔥
+      <h3>High Priority</h3>
+      <p>Follow up with pending high-value deals.</p>
+    </div>
+
+    <div style={{background:"#1e293b",padding:"20px",borderRadius:"12px"}}>
+      💰
+      <h3>Revenue</h3>
+      <p>Won deals contribute the highest revenue.</p>
+    </div>
+
+    <div style={{background:"#1e293b",padding:"20px",borderRadius:"12px"}}>
+      ⭐
+      <h3>AI Suggestion</h3>
+      <p>Contact today's new leads within 24 hours.</p>
+    </div>
+
+  </div>
+
+</div>
 
     </div>
   );
