@@ -44,6 +44,9 @@ export default function Sidebar({ setPage }) {
         <li onClick={() => setPage("profile")}>
   👤 Profile
 </li>
+        <li onClick={() => setPage("calendar")}>
+  📅 Calendar
+</li>
         
 
         <li onClick={() => setPage("settings")}>
