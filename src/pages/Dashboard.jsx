@@ -14,6 +14,7 @@ export default function Dashboard({ setPage }) {
   const [leadCount, setLeadCount] = useState(0);
   const [pendingReminders, setPendingReminders] = useState(0);
   const [completedReminders, setCompletedReminders] = useState(0);
+  const [todayReminders, setTodayReminders] = useState([]);
 
   useEffect(() => {
     loadCustomerCount();
@@ -22,6 +23,7 @@ export default function Dashboard({ setPage }) {
     loadConversion();
     loadPendingReminders();
     loadCompletedReminders();
+    loadTodayReminders();
   }, []);
 
   async function loadCustomerCount() {
@@ -103,6 +105,22 @@ async function loadCompletedReminders() {
     setCompletedReminders(count);
   }
 }
+
+  async function loadTodayReminders() {
+
+  const today = new Date().toISOString().split("T")[0];
+
+  const { data, error } = await supabase
+    .from("reminders")
+    .select("*")
+    .eq("reminder_date", today)
+    .order("reminder_time", { ascending: true });
+
+  if (!error) {
+    setTodayReminders(data);
+  }
+
+  }
 
   return (
     <div className="dashboard">
@@ -280,17 +298,41 @@ async function loadCompletedReminders() {
     📅 Today's Reminders
   </h2>
 
-  <div
-    style={{
-      background:"#1e293b",
-      padding:"18px",
-      borderRadius:"10px"
-    }}
-  >
-    <h3>📞 Follow up with ABC Pvt Ltd</h3>
-    <p>⏰ 10:00 AM</p>
-    <p>🔥 High Priority</p>
-  </div>
+  {todayReminders.length === 0 ? (
+
+  <p>No reminders for today.</p>
+
+) : (
+
+  todayReminders.map((item) => (
+
+    <div
+      key={item.id}
+      style={{
+        background:"#1e293b",
+        padding:"18px",
+        borderRadius:"10px",
+        marginBottom:"15px"
+      }}
+    >
+      <h3>{item.title}</h3>
+
+      <p>⏰ {item.reminder_time}</p>
+
+      <p>🔥 {item.priority}</p>
+
+      <p>📌 {item.status}</p>
+
+    </div>
+
+  ))
+
+)}
+    
+      
+      
+    
+    
 
 </div>
 
