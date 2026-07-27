@@ -59,3 +59,9 @@
   background:#1e293b;
   color:white;
 }
+
+.customers-table th:last-child,
+.customers-table td:last-child {
+    min-width: 280px;
+    white-space: nowrap;
+}
