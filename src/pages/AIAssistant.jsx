@@ -176,6 +176,55 @@ Requirements:
         </div>
       )}
 
+          {response && (
+  <button
+    onClick={() => {
+      navigator.clipboard.writeText(response);
+      alert("✅ Email copied successfully!");
+    }}
+    style={{
+      marginTop: "15px",
+      marginRight: "10px",
+      padding: "10px 18px",
+      background: "#10b981",
+      color: "white",
+      border: "none",
+      borderRadius: "8px",
+      cursor: "pointer",
+      fontWeight: "bold",
+    }}
+  >
+    📋 Copy Email
+  </button>
+)}
+          {response && (
+  <button
+    onClick={() => {
+      const blob = new Blob([response], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "SalesPilot_Email.txt";
+      a.click();
+
+      URL.revokeObjectURL(url);
+    }}
+    style={{
+      marginTop: "15px",
+      padding: "10px 18px",
+      background: "#2563eb",
+      color: "white",
+      border: "none",
+      borderRadius: "8px",
+      cursor: "pointer",
+      fontWeight: "bold",
+    }}
+  >
+    ⬇ Download Email
+  </button>
+)}
+
               </div>
   );
 
