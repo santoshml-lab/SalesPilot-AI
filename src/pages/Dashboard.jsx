@@ -11,9 +11,11 @@ export default function Dashboard() {
   const [dealCount, setDealCount] = useState(0);
   const [revenue, setRevenue] = useState(0);
   const [conversion, setConversion] = useState("0%");
+  const [leadCount, setLeadCount] = useState(0);
 
   useEffect(() => {
     loadCustomerCount();
+    loadLeadCount();
     loadDeals();
     loadConversion();
   }, []);
@@ -26,6 +28,15 @@ export default function Dashboard() {
     if (!error) {
       setCustomerCount(count);
     }
+  }
+  async function loadLeadCount() {
+  const { count, error } = await supabase
+    .from("leads")
+    .select("*", { count: "exact", head: true });
+
+  if (!error) {
+    setLeadCount(count);
+  }
   }
 
   async function loadDeals() {
@@ -87,6 +98,11 @@ export default function Dashboard() {
           value={customerCount}
           icon="👥"
         />
+        <StatCard
+         title="Leads"
+          value={leadCount}
+          icon="📈"
+         />
 
         <StatCard
           title="Deals"
