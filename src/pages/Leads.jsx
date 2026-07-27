@@ -61,31 +61,22 @@ export default function Leads({
         <h1>📈 Leads</h1>
 
         <button
-  onClick={() => {
-    setSelectedLead(null);
-    setPage("addLead");
-  }}
-  style={{
-    background: "#2563eb",
-    color: "white",
-    border: "none",
-    padding: "12px 20px",
-    borderRadius: "10px",
-    cursor: "pointer",
-    fontWeight: "bold"
-  }}
->
-  + Add Lead
-</button>
-        
-          
-            
-            
-
-              
-          
-        
-          
+          onClick={() => {
+            setSelectedLead(null);
+            setPage("addLead");
+          }}
+          style={{
+            background: "#2563eb",
+            color: "white",
+            border: "none",
+            padding: "12px 20px",
+            borderRadius: "10px",
+            cursor: "pointer",
+            fontWeight: "bold"
+          }}
+        >
+          + Add Lead
+        </button>
 
       </div>
 
@@ -118,38 +109,44 @@ export default function Leads({
                 lead.company.toLowerCase().includes(search.toLowerCase())
             )
             .map((lead) => (
-
               <tr key={lead.id}>
-
                 <td>{lead.name}</td>
                 <td>{lead.company}</td>
                 <td>{lead.source}</td>
                 <td>{lead.status}</td>
                 <td>{lead.score}</td>
 
-                <td>
+                                <td
+                  style={{
+                    whiteSpace: "nowrap",
+                    minWidth: "280px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                  }}
+                >
 
                   <button
-  onClick={() => {
-    setSelectedLead(lead);
-    setPage("addLead");
-  }}
-  style={{
-    background: "#f59e0b",
-    color: "white",
-    border: "none",
-    padding: "8px 14px",
-    borderRadius: "6px",
-    cursor: "pointer",
-    fontWeight: "bold"
-  }}
->
-  Edit
-</button>
-                  
-  <button
-  onClick={() => {
-    const prompt = `
+                    onClick={() => {
+                      setSelectedLead(lead);
+                      setPage("addLead");
+                    }}
+                    style={{
+                      background: "#f59e0b",
+                      color: "white",
+                      border: "none",
+                      padding: "8px 14px",
+                      borderRadius: "6px",
+                      cursor: "pointer",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      const prompt = `
 Lead Name: ${lead.name}
 Company: ${lead.company}
 Status: ${lead.status}
@@ -160,49 +157,37 @@ Analyze this lead and give:
 2. Next best action
 3. Follow-up strategy
 `;
-    setPage("ai");
-    localStorage.setItem("aiPrompt", prompt);
-  }}
-  style={{
-    marginLeft: "10px",
-    background: "#3b82f6",
-    color: "white",
-    border: "none",
-    padding: "8px 14px",
-    borderRadius: "6px",
-    cursor: "pointer",
-    fontWeight: "bold"
-  }}
->
-  🤖 AI
-</button>                  
-                      
-                      
-                    
-                  
-                    
-                  
+
+                      localStorage.setItem("aiPrompt", prompt);
+                      setPage("ai");
+                    }}
+                    style={{
+                      background: "#3b82f6",
+                      color: "white",
+                      border: "none",
+                      padding: "8px 14px",
+                      borderRadius: "6px",
+                      cursor: "pointer",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    🤖 AI
+                  </button>
 
                   <button
-  onClick={() => deleteLead(lead.id)}
-  style={{
-    marginLeft: "10px",
-    background: "#ef4444",
-    color: "white",
-    border: "none",
-    padding: "8px 14px",
-    borderRadius: "6px",
-    cursor: "pointer",
-    fontWeight: "bold"
-  }}
->
-  Delete
-</button>
-                    
-                    
-                  
-                    
-                  
+                    onClick={() => deleteLead(lead.id)}
+                    style={{
+                      background: "#ef4444",
+                      color: "white",
+                      border: "none",
+                      padding: "8px 14px",
+                      borderRadius: "6px",
+                      cursor: "pointer",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Delete
+                  </button>
 
                 </td>
 
@@ -210,7 +195,7 @@ Analyze this lead and give:
 
             ))}
 
-        </tbody>
+                  </tbody>
 
       </table>
 
