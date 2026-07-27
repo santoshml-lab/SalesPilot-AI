@@ -6,6 +6,7 @@ export default function AIAssistant() {
   const [prompt, setPrompt] = useState("");
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
+  const [emailType, setEmailType] = useState("Follow-up Email");
 
   useEffect(() => {
 
@@ -24,7 +25,22 @@ export default function AIAssistant() {
 
   async function generateAI(customPrompt = null) {
 
-    const finalPrompt = customPrompt || prompt;
+    const finalPrompt = `
+You are a professional Sales CRM AI.
+
+Generate a ${emailType}.
+
+User Request:
+${prompt}
+
+Requirements:
+- Professional tone
+- Clear subject line
+- Proper greeting
+- Well-structured email
+- Strong closing
+- Keep it concise and business-friendly.
+`;
 
     if (!finalPrompt.trim()) {
       alert("Please enter a prompt");
@@ -74,6 +90,25 @@ export default function AIAssistant() {
     >
 
       <h1>🤖 SalesPilot AI Assistant</h1>
+       <div style={{ marginBottom: "20px" }}>
+
+  <label style={{ color: "white", fontWeight: "bold" }}>
+    Email Type
+  </label>
+
+  <select
+    className="search-input"
+    value={emailType}
+    onChange={(e) => setEmailType(e.target.value)}
+  >
+    <option>Follow-up Email</option>
+    <option>Cold Outreach</option>
+    <option>Proposal Email</option>
+    <option>Meeting Request</option>
+    <option>Thank You Email</option>
+  </select>
+
+</div>   
 
       <p
         style={{
