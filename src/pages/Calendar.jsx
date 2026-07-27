@@ -87,9 +87,14 @@ export default function Calendar() {
             marginTop: "20px",
           }}
         >
-          <button className="search-input">
+          <button
+  className="search-input"
+  onClick={() => setPage("addReminder")}
+>
   ➕ Add Reminder
 </button>
+  
+
 
           <button className="search-input">📅 Schedule Meeting</button>
 
