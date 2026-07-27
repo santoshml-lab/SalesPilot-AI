@@ -163,18 +163,40 @@ Requirements:
       </button>
 
       {response && (
-        <div
-          style={{
-            marginTop: "25px",
-            padding: "20px",
-            background: "#1e293b",
-            borderRadius: "12px",
-            whiteSpace: "pre-wrap",
-          }}
-        >
-          {response}
-        </div>
-      )}
+  <div
+    style={{
+      marginTop: "25px",
+      background: "#111827",
+      borderRadius: "15px",
+      padding: "25px",
+      border: "1px solid rgba(255,255,255,.08)",
+    }}
+  >
+
+    <h2 style={{ marginBottom: "15px" }}>
+      ✉️ AI Generated Email
+    </h2>
+
+    <div
+      style={{
+        background: "#1e293b",
+        padding: "20px",
+        borderRadius: "10px",
+        whiteSpace: "pre-wrap",
+        lineHeight: "1.8",
+      }}
+    >
+      {response}
+    </div>
+
+  </div>
+)}
+        
+          
+            
+            
+            
+          
 
           {response && (
   <button
