@@ -87,7 +87,9 @@ export default function Calendar() {
             marginTop: "20px",
           }}
         >
-          <button className="search-input">➕ Add Reminder</button>
+          <button className="search-input">
+  ➕ Add Reminder
+</button>
 
           <button className="search-input">📅 Schedule Meeting</button>
 
