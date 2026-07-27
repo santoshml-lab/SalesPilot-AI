@@ -47,7 +47,7 @@ export default function App() {
 
         <Navbar setPage={setPage} />
 
-        {page === "dashboard" && <Dashboard />}
+        {page === "dashboard" && <Dashboard setPage={setPage} />}
 
         {page === "deals" && (
           <Deals
