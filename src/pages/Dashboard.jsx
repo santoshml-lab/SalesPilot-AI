@@ -218,8 +218,89 @@ export default function Dashboard() {
 
   </div>
 
-</div>     
+</div>    
+      
+<div
+  style={{
+    marginTop: "30px",
+    background: "#111827",
+    padding: "25px",
+    borderRadius: "15px",
+    border: "1px solid rgba(255,255,255,.08)"
+  }}
+>
 
+  <h2 style={{ marginBottom: "20px" }}>
+    ⚡ Quick Actions
+  </h2>
+
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))",
+      gap: "15px"
+    }}
+  >
+
+    <button
+      style={{
+        padding:"16px",
+        background:"#2563eb",
+        color:"white",
+        border:"none",
+        borderRadius:"12px",
+        cursor:"pointer",
+        fontWeight:"bold"
+      }}
+    >
+      ➕ Add Customer
+    </button>
+
+    <button
+      style={{
+        padding:"16px",
+        background:"#10b981",
+        color:"white",
+        border:"none",
+        borderRadius:"12px",
+        cursor:"pointer",
+        fontWeight:"bold"
+      }}
+    >
+      📈 Add Lead
+    </button>
+
+    <button
+      style={{
+        padding:"16px",
+        background:"#f59e0b",
+        color:"white",
+        border:"none",
+        borderRadius:"12px",
+        cursor:"pointer",
+        fontWeight:"bold"
+      }}
+    >
+      💼 Add Deal
+    </button>
+
+    <button
+      style={{
+        padding:"16px",
+        background:"#7c3aed",
+        color:"white",
+        border:"none",
+        borderRadius:"12px",
+        cursor:"pointer",
+        fontWeight:"bold"
+      }}
+    >
+      🤖 Open AI
+    </button>
+
+  </div>
+
+</div>
     </div>
   );
 }
