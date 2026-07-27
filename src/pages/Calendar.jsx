@@ -22,6 +22,22 @@ export default function Calendar({ setPage }) {
     }
 
   }
+  async function deleteReminder(id) {
+
+  if (!window.confirm("Delete this reminder?")) return;
+
+  const { error } = await supabase
+    .from("reminders")
+    .delete()
+    .eq("id", id);
+
+  if (!error) {
+    fetchReminders();
+  }
+
+  }8
+
+  
   return (
     <div
       className="customers-page"
@@ -165,17 +181,23 @@ export default function Calendar({ setPage }) {
           </button>
 
           <button
-            style={{
-              background: "#ef4444",
-              color: "white",
-              border: "none",
-              padding: "8px 14px",
-              borderRadius: "8px",
-              cursor: "pointer",
-            }}
-          >
-            🗑 Delete
-          </button>
+  onClick={() => deleteReminder(item.id)}
+  style={{
+    background: "#ef4444",
+    color: "white",
+    border: "none",
+    padding: "8px 14px",
+    borderRadius: "8px",
+    cursor: "pointer",
+  }}
+>
+  🗑 Delete
+</button>
+            
+              
+              
+              
+              
 
         </div>
 
