@@ -31,7 +31,7 @@ You are a professional Sales CRM AI.
 Generate a ${emailType}.
 
 User Request:
-${prompt}
+${customPrompt || prompt}
 
 Requirements:
 - Professional tone
@@ -41,6 +41,15 @@ Requirements:
 - Strong closing
 - Keep it concise and business-friendly.
 `;
+
+
+
+
+
+
+
+
+
 
     if (!finalPrompt.trim()) {
       alert("Please enter a prompt");
