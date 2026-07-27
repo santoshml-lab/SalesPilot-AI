@@ -5,7 +5,7 @@ import "../styles/dashboard.css";
 import StatCard from "../components/StatCard";
 import SalesChart from "../components/SalesChart";
 
-export default function Dashboard() {
+export default function Dashboard({ setPage }) {
 
   const [customerCount, setCustomerCount] = useState(0);
   const [dealCount, setDealCount] = useState(0);
@@ -243,6 +243,7 @@ export default function Dashboard() {
   >
 
     <button
+      onClick={() => setPage("addCustomer")}
       style={{
         padding:"16px",
         background:"#2563eb",
@@ -257,6 +258,7 @@ export default function Dashboard() {
     </button>
 
     <button
+      onClick={() => setPage("addLead")}
       style={{
         padding:"16px",
         background:"#10b981",
@@ -271,6 +273,7 @@ export default function Dashboard() {
     </button>
 
     <button
+      onClick={() => setPage("addDeal")}
       style={{
         padding:"16px",
         background:"#f59e0b",
@@ -284,7 +287,8 @@ export default function Dashboard() {
       💼 Add Deal
     </button>
 
-    <button
+    <button 
+      onClick={() => setPage("ai")}
       style={{
         padding:"16px",
         background:"#7c3aed",
