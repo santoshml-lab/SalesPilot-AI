@@ -12,12 +12,16 @@ export default function Dashboard({ setPage }) {
   const [revenue, setRevenue] = useState(0);
   const [conversion, setConversion] = useState("0%");
   const [leadCount, setLeadCount] = useState(0);
+  const [pendingReminders, setPendingReminders] = useState(0);
+  const [completedReminders, setCompletedReminders] = useState(0);
 
   useEffect(() => {
     loadCustomerCount();
     loadLeadCount();
     loadDeals();
     loadConversion();
+    loadPendingReminders();
+    loadCompletedReminders();
   }, []);
 
   async function loadCustomerCount() {
@@ -78,6 +82,28 @@ export default function Dashboard({ setPage }) {
     }
   }
 
+  async function loadPendingReminders() {
+  const { count, error } = await supabase
+    .from("reminders")
+    .select("*", { count: "exact", head: true })
+    .eq("status", "Pending");
+
+  if (!error) {
+    setPendingReminders(count);
+  }
+}
+
+async function loadCompletedReminders() {
+  const { count, error } = await supabase
+    .from("reminders")
+    .select("*", { count: "exact", head: true })
+    .eq("status", "Completed");
+
+  if (!error) {
+    setCompletedReminders(count);
+  }
+}
+
   return (
     <div className="dashboard">
 
@@ -115,6 +141,17 @@ export default function Dashboard({ setPage }) {
           value={conversion}
           icon="📈"
         />
+        <StatCard
+  title="Pending"
+  value={pendingReminders}
+  icon="⏰"
+/>
+
+<StatCard
+  title="Completed"
+  value={completedReminders}
+  icon="✅"
+/>
 
       </div>
 
