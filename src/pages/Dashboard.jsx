@@ -266,6 +266,33 @@ async function loadCompletedReminders() {
     border: "1px solid rgba(255,255,255,.08)"
   }}
 >
+  <div
+  style={{
+    marginTop: "30px",
+    background: "#111827",
+    padding: "25px",
+    borderRadius: "15px",
+    border: "1px solid rgba(255,255,255,.08)"
+  }}
+>
+
+  <h2 style={{ marginBottom: "20px" }}>
+    📅 Today's Reminders
+  </h2>
+
+  <div
+    style={{
+      background:"#1e293b",
+      padding:"18px",
+      borderRadius:"10px"
+    }}
+  >
+    <h3>📞 Follow up with ABC Pvt Ltd</h3>
+    <p>⏰ 10:00 AM</p>
+    <p>🔥 High Priority</p>
+  </div>
+
+</div>
 
   <h2 style={{ marginBottom: "20px" }}>
     ⚡ Quick Actions
