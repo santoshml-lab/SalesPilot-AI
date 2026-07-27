@@ -101,7 +101,9 @@ export default function App() {
         {page === "notifications" && <Notifications />}
         {page === "reports" && <Reports />}
         {page === "profile" && <Profile />}
-        {page === "calendar" && <Calendar />}
+        {page === "calendar" && (
+  <Calendar setPage={setPage} />
+)}
         {page === "addReminder" && <AddReminder setPage={setPage} />}
 
       </div>
