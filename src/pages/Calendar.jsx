@@ -1,6 +1,6 @@
 import "../styles/customers.css";
 
-export default function Calendar() {
+export default function Calendar({ setPage }) {
   return (
     <div
       className="customers-page"
