@@ -1,73 +1,91 @@
 import { useState, useEffect } from "react";
 import "../styles/customers.css";
 
-async function generateAI(customPrompt = null) {
+export default function AIAssistant() {
 
-  const finalPrompt = customPrompt || prompt;
+  const [prompt, setPrompt] = useState("");
+  const [response, setResponse] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  if (!finalPrompt.trim()) {
-    alert("Please enter a prompt");
-    return;
-  }
+  useEffect(() => {
 
-  try {
+    const savedPrompt = localStorage.getItem("aiPrompt");
 
-    setLoading(true);
-    setResponse("");
+    if (savedPrompt) {
+      setPrompt(savedPrompt);
+      localStorage.removeItem("aiPrompt");
 
-    const res = await fetch(
-      "https://salespilot-l1d3.onrender.com/chat",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          prompt: finalPrompt,
-        }),
-      }
-    );
-
-    const data = await res.json();
-
-    if (res.ok) {
-      setResponse(data.response);
-    } else {
-      setResponse(data.detail || "Something went wrong.");
+      setTimeout(() => {
+        generateAI(savedPrompt);
+      }, 300);
     }
 
-  } catch (error) {
-    console.error(error);
-    setResponse("Unable to connect to AI server.");
-  } finally {
- setLoading(false);
+  }, []);
+
+  async function generateAI(customPrompt = null) {
+
+    const finalPrompt = customPrompt || prompt;
+
+    if (!finalPrompt.trim()) {
+      alert("Please enter a prompt");
+      return;
+    }
+
+    try {
+
+      setLoading(true);
+      setResponse("");
+
+      const res = await fetch(
+        "https://salespilot-l1d3.onrender.com/chat",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            prompt: finalPrompt,
+          }),
+        }
+      );
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setResponse(data.response);
+      } else {
+        setResponse(data.detail || "Something went wrong.");
+      }
+
+    } catch (error) {
+      console.error(error);
+      setResponse("Unable to connect to AI server.");
+    } finally {
+      setLoading(false);
+    }
+
   }
-} 
-      
-      
-    
-
-    
-
-      
-      
-
-      
-          
 
   return (
 
-    <div
+        <div
       className="customers-page"
       style={{ marginTop: "80px" }}
     >
 
       <h1>🤖 SalesPilot AI Assistant</h1>
 
-<p style={{ color:"#94a3b8", marginBottom:"20px", fontSize:"16px" }}>
-  Your intelligent AI assistant for sales, customer engagement, lead management, deal insights, email writing, follow-ups, and business growth.
-</p>     
-          
+      <p
+        style={{
+          color: "#94a3b8",
+          marginBottom: "20px",
+          fontSize: "16px",
+        }}
+      >
+        Your intelligent AI assistant for sales, customer engagement,
+        lead management, deal insights, email writing,
+        follow-ups, and business growth.
+      </p>
 
       <textarea
         value={prompt}
@@ -85,7 +103,7 @@ async function generateAI(customPrompt = null) {
       />
 
       <button
-        onClick={generateAI}
+        onClick={() => generateAI()}
         disabled={loading}
         style={{
           marginTop: "20px",
@@ -114,6 +132,7 @@ async function generateAI(customPrompt = null) {
         </div>
       )}
 
-    </div>
+              </div>
   );
+
 }
