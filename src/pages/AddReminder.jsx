@@ -2,6 +2,7 @@ import { useState } from "react";
 import { supabase } from "../lib/supabase";
 import "../styles/customers.css";
 
+
 export default function AddReminder({ setPage }) {
 
   const [title, setTitle] = useState("");
