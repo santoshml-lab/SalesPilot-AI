@@ -1,6 +1,27 @@
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabase";
 import "../styles/customers.css";
 
 export default function Calendar({ setPage }) {
+
+  const [reminders, setReminders] = useState([]);
+
+  useEffect(() => {
+    fetchReminders();
+  }, []);
+
+  async function fetchReminders() {
+
+    const { data, error } = await supabase
+      .from("reminders")
+      .select("*")
+      .order("reminder_date", { ascending: true });
+
+    if (!error) {
+      setReminders(data);
+    }
+
+  }
   return (
     <div
       className="customers-page"
@@ -67,6 +88,104 @@ export default function Calendar({ setPage }) {
           <p>Call pending for GlobalTech.</p>
         </div>
       </div>
+
+      {/* Live Reminders */}
+
+<div
+  style={{
+    background: "#111827",
+    padding: "25px",
+    borderRadius: "15px",
+    marginBottom: "25px",
+  }}
+>
+  <h2>📋 Live Reminders</h2>
+
+  {reminders.length === 0 ? (
+
+    <p style={{ color: "#94a3b8", marginTop: "15px" }}>
+      No reminders found.
+    </p>
+
+  ) : (
+
+    reminders.map((item) => (
+
+      <div
+        key={item.id}
+        style={{
+          background: "#1e293b",
+          padding: "15px",
+          borderRadius: "10px",
+          marginTop: "15px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+
+        <div>
+
+          <h3 style={{ margin: 0 }}>
+            {item.title}
+          </h3>
+
+          <p style={{ margin: "6px 0", color: "#94a3b8" }}>
+            📅 {item.reminder_date}
+          </p>
+
+          <p style={{ margin: 0 }}>
+            ⏰ {item.reminder_time}
+          </p>
+
+          <p style={{ marginTop: "5px" }}>
+            🔥 {item.priority}
+          </p>
+
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            gap: "10px",
+          }}
+        >
+
+          <button
+            style={{
+              background: "#10b981",
+              color: "white",
+              border: "none",
+              padding: "8px 14px",
+              borderRadius: "8px",
+              cursor: "pointer",
+            }}
+          >
+            ✅ Complete
+          </button>
+
+          <button
+            style={{
+              background: "#ef4444",
+              color: "white",
+              border: "none",
+              padding: "8px 14px",
+              borderRadius: "8px",
+              cursor: "pointer",
+            }}
+          >
+            🗑 Delete
+          </button>
+
+        </div>
+
+      </div>
+
+    ))
+
+  )}
+
+</div>
 
       {/* Quick Actions */}
 
