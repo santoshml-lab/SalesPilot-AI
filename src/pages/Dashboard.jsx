@@ -168,6 +168,57 @@ export default function Dashboard() {
   </div>
 
 </div>
+ <div
+  style={{
+    marginTop: "30px",
+    background: "#111827",
+    padding: "25px",
+    borderRadius: "15px",
+    border: "1px solid rgba(255,255,255,.08)"
+  }}
+>
+
+  <h2 style={{ marginBottom: "20px" }}>
+    📋 Recent Activity
+  </h2>
+
+  <div style={{ display: "grid", gap: "15px" }}>
+
+    <div style={{
+      background:"#1e293b",
+      padding:"15px",
+      borderRadius:"10px"
+    }}>
+      👤 New customer added successfully.
+    </div>
+
+    <div style={{
+      background:"#1e293b",
+      padding:"15px",
+      borderRadius:"10px"
+    }}>
+      📈 New lead created.
+    </div>
+
+    <div style={{
+      background:"#1e293b",
+      padding:"15px",
+      borderRadius:"10px"
+    }}>
+      💼 Deal updated.
+    </div>
+
+    <div style={{
+      background:"#1e293b",
+      padding:"15px",
+      borderRadius:"10px"
+    }}>
+      🤖 AI Assistant generated sales insights.
+    </div>
+
+  </div>
+
+</div>     
 
     </div>
   );
