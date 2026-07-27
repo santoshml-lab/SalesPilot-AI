@@ -35,7 +35,22 @@ export default function Calendar({ setPage }) {
     fetchReminders();
   }
 
-  }8
+  }
+
+  async function completeReminder(id) {
+
+  const { error } = await supabase
+    .from("reminders")
+    .update({
+      status: "Completed",
+    })
+    .eq("id", id);
+
+  if (!error) {
+    fetchReminders();
+  }
+
+  }
 
   
   return (
@@ -168,17 +183,28 @@ export default function Calendar({ setPage }) {
         >
 
           <button
-            style={{
-              background: "#10b981",
-              color: "white",
-              border: "none",
-              padding: "8px 14px",
-              borderRadius: "8px",
-              cursor: "pointer",
-            }}
-          >
-            ✅ Complete
-          </button>
+  onClick={() => completeReminder(item.id)}
+  style={{
+    background: "#10b981",
+    color: "white",
+    border: "none",
+    padding: "8px 14px",
+    borderRadius: "8px",
+    cursor: "pointer",
+  }}
+>
+  ✅ Complete
+</button>
+            
+              
+              
+              
+              
+              
+              
+          
+            
+          
 
           <button
   onClick={() => deleteReminder(item.id)}
