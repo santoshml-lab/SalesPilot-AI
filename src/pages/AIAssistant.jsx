@@ -130,6 +130,52 @@ Requirements:
         lead management, deal insights, email writing,
         follow-ups, and business growth.
       </p>
+      <div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))",
+    gap: "12px",
+    marginBottom: "20px",
+  }}
+>
+
+  <button
+    className="search-input"
+    onClick={() =>
+      setPrompt("Write a professional follow-up email for a customer after a product demo.")
+    }
+  >
+    ✉️ Follow-up
+  </button>
+
+  <button
+    className="search-input"
+    onClick={() =>
+      setPrompt("Generate a cold outreach email introducing SalesPilot AI CRM.")
+    }
+  >
+    📩 Cold Email
+  </button>
+
+  <button
+    className="search-input"
+    onClick={() =>
+      setPrompt("Write a business proposal email for CRM software.")
+    }
+  >
+    📄 Proposal
+  </button>
+
+  <button
+    className="search-input"
+    onClick={() =>
+      setPrompt("Generate a meeting request email for a sales discussion.")
+    }
+  >
+    🤝 Meeting
+  </button>
+
+</div>    
 
       <textarea
         value={prompt}
