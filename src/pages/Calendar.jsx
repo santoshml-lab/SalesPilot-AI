@@ -172,6 +172,20 @@ export default function Calendar({ setPage }) {
           <p style={{ marginTop: "5px" }}>
             🔥 {item.priority}
           </p>
+          <p>
+  📌 Status:
+  <strong
+    style={{
+      color:
+        item.status === "Completed"
+          ? "#22c55e"
+          : "#f59e0b",
+    }}
+  >
+    {" "}
+    {item.status}
+  </strong>
+</p>
 
         </div>
 
