@@ -299,15 +299,14 @@ async function loadCompletedReminders() {
   </div>
 
 </div>
- <div
-  style={{
-    marginTop: "30px",
-    background: "#111827",
-    padding: "25px",
-    borderRadius: "15px",
-    border: "1px solid rgba(255,255,255,.08)"
-  }}
->
+ 
+  
+    
+    
+    
+    
+  
+
 
   <div
   style={{
