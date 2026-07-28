@@ -17,6 +17,7 @@ export default function Dashboard({ setPage }) {
   const [todayReminders, setTodayReminders] = useState([]);
   const [topLeads, setTopLeads] = useState([]);
   const [notifications, setNotifications] = useState([]);
+  const [activities, setActivities] = useState([]);
 
   useEffect(() => {
     loadCustomerCount();
@@ -28,6 +29,7 @@ export default function Dashboard({ setPage }) {
     loadTodayReminders();
     loadTopLeads();
     loadNotifications();
+    loadActivities();
   }, []);
   
 
@@ -99,6 +101,50 @@ export default function Dashboard({ setPage }) {
     setTopLeads(data);
   }
   }
+  async function loadActivities() {
+
+  const activityList = [];
+
+  const { data: customers } = await supabase
+    .from("customers")
+    .select("*")
+    .order("id", { ascending: false })
+    .limit(2);
+
+  customers?.forEach((item) => {
+    activityList.push({
+      text: `👤 New customer added: ${item.name}`,
+    });
+  });
+
+  const { data: leads } = await supabase
+    .from("leads")
+    .select("*")
+    .order("id", { ascending: false })
+    .limit(2);
+
+  leads?.forEach((item) => {
+    activityList.push({
+      text: `📈 New lead created: ${item.name}`,
+    });
+  });
+
+  const { data: deals } = await supabase
+    .from("deals")
+    .select("*")
+    .order("id", { ascending: false })
+    .limit(2);
+
+  deals?.forEach((item) => {
+    activityList.push({
+      text: `💼 Deal updated: ${item.title}`,
+    });
+  });
+
+  setActivities(activityList);
+  }
+
+  
   async function loadNotifications() {
 
   const { data } = await supabase
