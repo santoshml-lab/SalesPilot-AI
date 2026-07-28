@@ -59,6 +59,7 @@ export default function Leads({
       >
 
         <h1>📈 Leads</h1>
+        
 
         <button
           onClick={() => {
@@ -95,6 +96,7 @@ export default function Leads({
             <th>Company</th>
             <th>Source</th>
             <th>Status</th>
+            <th>AI Score</th>
             <th>Score</th>
             <th>Action</th>
           </tr>
