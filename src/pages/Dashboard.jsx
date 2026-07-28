@@ -362,7 +362,7 @@ async function loadCompletedReminders() {
  
   
 
-  </div>
+  
 
 </div>    
       
