@@ -36,7 +36,7 @@ export default function Dashboard({ setPage }) {
     loadTopLeads();
     loadNotifications();
     loadActivities();
-    loadSalesCoach();
+    
     
   }, []);
 
@@ -157,20 +157,7 @@ async function loadActivities() {
       text: `👤 New customer added: ${item.name}`,
     });
   });
-  async function loadSalesCoach() {
-  if (leadCount === 0) {
-    setSalesCoach("Start adding leads to receive AI coaching.");
-    return;
-  }
-
-  if (pendingReminders > 5) {
-    setSalesCoach("⚠️ You have many pending follow-ups. Complete them first.");
-  } else if (conversion === "0%") {
-    setSalesCoach("📞 Contact new leads within 24 hours to improve conversions.");
-  } else {
-    setSalesCoach("🚀 Great work! Focus on high-priority leads to increase revenue.");
-  }
-  }
+    
 
   const { data: leads } = await supabase
     .from("leads")
@@ -605,31 +592,8 @@ async function loadActivities() {
   )}
 
 </div>
-    <div
-  style={{
-    marginTop: "30px",
-    background: "#111827",
-    padding: "25px",
-    borderRadius: "15px",
-    border: "1px solid rgba(255,255,255,.08)"
-  }}
->
-  <h2>🤖 AI Sales Coach</h2>
-
-  <div
-    style={{
-      marginTop: "15px",
-      background: "#1e293b",
-      padding: "20px",
-      borderRadius: "10px",
-      color: "white",
-      fontSize: "16px",
-      lineHeight: "1.7"
-    }}
-  >
-    {salesCoach}
-  </div>
-</div>
+      
+      
 
 <h2 style={{ marginTop: "35px", marginBottom: "20px" }}>
   ⚡ Quick Actions
