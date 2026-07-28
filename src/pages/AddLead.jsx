@@ -71,6 +71,12 @@ export default function AddLead({
 
       const { error } = await supabase
         .from("leads")
+        let score = 50;
+
+if (status === "New") score = 60;
+if (status === "Contacted") score = 75;
+if (status === "Qualified") score = 90;
+if (status === "Lost") score = 20;
         .insert([
           {
             name,
