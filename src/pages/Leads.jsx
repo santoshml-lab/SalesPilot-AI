@@ -9,7 +9,7 @@ export default function Leads({
 
   const [leads, setLeads] = useState([]);
   const [search, setSearch] = useState("");
-  const [analysis, setAnalysis] = useState("");
+  
 
   useEffect(() => {
     fetchLeads();
@@ -43,38 +43,13 @@ export default function Leads({
       fetchLeads();
     }
   }
-  async function analyzeLead(lead) {
+  
 
-  const prompt = `
-Analyze this sales lead.
+  
 
-Lead Name: ${lead.name}
-Company: ${lead.company}
-Status: ${lead.status}
-Score: ${lead.score}
+      
 
-Provide:
-
-1. Conversion Probability
-2. Risk Level
-3. Next Best Action
-4. Best Follow-up Time
-`;
-
-  const res = await fetch("https://salespilot-l1d3.onrender.com/chat", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      prompt,
-    }),
-  });
-
-  const data = await res.json();
-
-  setAnalysis(data.response);
-  }
+  
 
   return (
     <div
@@ -194,8 +169,8 @@ Provide:
                   </button>
 
                   <button
-                    onClick={() => {
-                      const prompt = `
+  onClick={() => {
+    const prompt = `
 Lead Name: ${lead.name}
 Company: ${lead.company}
 Status: ${lead.status}
@@ -207,21 +182,24 @@ Analyze this lead and give:
 3. Follow-up strategy
 `;
 
-                      onClick={() => analyzeLead(lead)}
+    localStorage.setItem("aiPrompt", prompt);
+    setPage("ai");
+  }}
+  style={{
+    background: "#3b82f6",
+    color: "white",
+    border: "none",
+    padding: "8px 14px",
+    borderRadius: "6px",
+    cursor: "pointer",
+    fontWeight: "bold",
+  }}
+>
+  🤖 AI
+</button>
+                    
                       
-                    }}
-                    style={{
-                      background: "#3b82f6",
-                      color: "white",
-                      border: "none",
-                      padding: "8px 14px",
-                      borderRadius: "6px",
-                      cursor: "pointer",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    🤖 AI
-                  </button>
+
 
                   <button
                     onClick={() => deleteLead(lead.id)}
