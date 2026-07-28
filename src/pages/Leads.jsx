@@ -130,7 +130,7 @@ Provide:
             <th>Source</th>
             <th>Status</th>
             <th>AI Score</th>
-            <th>Score</th>
+  
             <th>Action</th>
           </tr>
         </thead>
@@ -207,8 +207,8 @@ Analyze this lead and give:
 3. Follow-up strategy
 `;
 
-                      localStorage.setItem("aiPrompt", prompt);
-                      setPage("ai");
+                      onClick={() => analyzeLead(lead)}
+                      
                     }}
                     style={{
                       background: "#3b82f6",
@@ -247,6 +247,30 @@ Analyze this lead and give:
                   </tbody>
 
       </table>
+      {analysis && (
+  <div
+    style={{
+      marginTop: "30px",
+      background: "#111827",
+      padding: "25px",
+      borderRadius: "15px",
+      whiteSpace: "pre-wrap",
+    }}
+  >
+    <h2>🧠 AI Lead Analysis</h2>
+
+    <div
+      style={{
+        background: "#1e293b",
+        padding: "20px",
+        borderRadius: "10px",
+        marginTop: "15px",
+      }}
+    >
+      {analysis}
+    </div>
+  </div>
+)}
 
     </div>
   );
