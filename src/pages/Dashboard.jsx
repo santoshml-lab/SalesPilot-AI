@@ -16,6 +16,7 @@ export default function Dashboard({ setPage }) {
   const [completedReminders, setCompletedReminders] = useState(0);
   const [todayReminders, setTodayReminders] = useState([]);
   const [topLeads, setTopLeads] = useState([]);
+  const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
     loadCustomerCount();
@@ -26,6 +27,7 @@ export default function Dashboard({ setPage }) {
     loadCompletedReminders();
     loadTodayReminders();
     loadTopLeads();
+    loadNotifications();
   }, []);
   
 
@@ -96,6 +98,20 @@ export default function Dashboard({ setPage }) {
   if (!error) {
     setTopLeads(data);
   }
+  }
+  async function loadNotifications() {
+
+  const { data } = await supabase
+    .from("reminders")
+    .select("*")
+    .eq("status", "Pending")
+    .order("reminder_date", { ascending: true })
+    .limit(5);
+
+  if (data) {
+    setNotifications(data);
+  }
+
   }
 
   async function loadPendingReminders() {
@@ -444,6 +460,52 @@ async function loadCompletedReminders() {
       </div>
     ))
   )}
+</div>
+  <div
+  style={{
+    marginTop: "30px",
+    background: "#111827",
+    padding: "25px",
+    borderRadius: "15px",
+  }}
+>
+
+  <h2>🔔 Smart Notifications</h2>
+
+  {notifications.length === 0 ? (
+
+    <p style={{ color: "#94a3b8" }}>
+      No pending reminders 🎉
+    </p>
+
+  ) : (
+
+    notifications.map((item) => (
+
+      <div
+        key={item.id}
+        style={{
+          background: "#1e293b",
+          padding: "15px",
+          borderRadius: "10px",
+          marginTop: "15px",
+        }}
+      >
+
+        <strong>{item.title}</strong>
+
+        <br />
+
+        <small>
+          📅 {item.reminder_date}
+        </small>
+
+      </div>
+
+    ))
+
+  )}
+
 </div>
 
   <h2 style={{ marginBottom: "20px" }}>
