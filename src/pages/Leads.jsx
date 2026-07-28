@@ -9,6 +9,7 @@ export default function Leads({
 
   const [leads, setLeads] = useState([]);
   const [search, setSearch] = useState("");
+  const [analysis, setAnalysis] = useState("");
   
 
   useEffect(() => {
