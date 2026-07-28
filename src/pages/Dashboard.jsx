@@ -12,9 +12,11 @@ export default function Dashboard({ setPage }) {
   const [revenue, setRevenue] = useState(0);
   const [conversion, setConversion] = useState("0%");
   const [leadCount, setLeadCount] = useState(0);
+
   const [pendingReminders, setPendingReminders] = useState(0);
   const [completedReminders, setCompletedReminders] = useState(0);
   const [todayReminders, setTodayReminders] = useState([]);
+
   const [topLeads, setTopLeads] = useState([]);
   const [notifications, setNotifications] = useState([]);
   const [activities, setActivities] = useState([]);
@@ -24,85 +26,119 @@ export default function Dashboard({ setPage }) {
     loadLeadCount();
     loadDeals();
     loadConversion();
+
     loadPendingReminders();
     loadCompletedReminders();
     loadTodayReminders();
+
     loadTopLeads();
     loadNotifications();
     loadActivities();
   }, []);
-  
 
   async function loadCustomerCount() {
-    const { count, error } = await supabase
-      .from("customers")
-      .select("*", { count: "exact", head: true });
+  const { count } = await supabase
+    .from("customers")
+    .select("*", { count: "exact", head: true });
 
-    if (!error) {
-      setCustomerCount(count);
-    }
-  }
-  async function loadLeadCount() {
-  const { count, error } = await supabase
+  setCustomerCount(count || 0);
+}
+
+async function loadLeadCount() {
+  const { count } = await supabase
     .from("leads")
     .select("*", { count: "exact", head: true });
 
-  if (!error) {
-    setLeadCount(count);
+  setLeadCount(count || 0);
+}
+
+async function loadDeals() {
+  const { data } = await supabase
+    .from("deals")
+    .select("*");
+
+  if (!data) return;
+
+  setDealCount(data.length);
+
+  const total = data.reduce((sum, deal) => {
+    return deal.status === "Won"
+      ? sum + Number(deal.amount)
+      : sum;
+  }, 0);
+
+  setRevenue(total);
+}
+
+async function loadConversion() {
+  const { count: leadTotal } = await supabase
+    .from("leads")
+    .select("*", { count: "exact", head: true });
+
+  const { count: wonDeals } = await supabase
+    .from("deals")
+    .select("*", { count: "exact", head: true })
+    .eq("status", "Won");
+
+  if (leadTotal > 0) {
+    setConversion(`${((wonDeals / leadTotal) * 100).toFixed(1)}%`);
+  } else {
+    setConversion("0%");
   }
-  }
+}
 
-  async function loadDeals() {
-    const { data, error } = await supabase
-      .from("deals")
-      .select("*");
+async function loadPendingReminders() {
+  const { count } = await supabase
+    .from("reminders")
+    .select("*", { count: "exact", head: true })
+    .eq("status", "Pending");
 
-    if (error) {
-      console.error(error);
-      return;
-    }
+  setPendingReminders(count || 0);
+}
 
-    setDealCount(data.length);
+async function loadCompletedReminders() {
+  const { count } = await supabase
+    .from("reminders")
+    .select("*", { count: "exact", head: true })
+    .eq("status", "Completed");
 
-    const totalRevenue = data.reduce((sum, deal) => {
-      return deal.status === "Won"
-        ? sum + Number(deal.amount)
-        : sum;
-    }, 0);
+  setCompletedReminders(count || 0);
+}
 
-    setRevenue(totalRevenue);
-  }
+async function loadTodayReminders() {
+  const today = new Date().toISOString().split("T")[0];
 
-  async function loadConversion() {
-    const { count: leadCount } = await supabase
-      .from("leads")
-      .select("*", { count: "exact", head: true });
+  const { data } = await supabase
+    .from("reminders")
+    .select("*")
+    .eq("reminder_date", today)
+    .order("reminder_time");
 
-    const { count: wonDeals } = await supabase
-      .from("deals")
-      .select("*", { count: "exact", head: true })
-      .eq("status", "Won");
+  setTodayReminders(data || []);
+}
 
-    if (leadCount > 0) {
-      const percent = ((wonDeals / leadCount) * 100).toFixed(1);
-      setConversion(`${percent}%`);
-    } else {
-      setConversion("0%");
-    }
-  }
   async function loadTopLeads() {
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from("leads")
     .select("*")
     .order("score", { ascending: false })
     .limit(5);
 
-  if (!error) {
-    setTopLeads(data);
-  }
-  }
-  async function loadActivities() {
+  setTopLeads(data || []);
+}
 
+async function loadNotifications() {
+  const { data } = await supabase
+    .from("reminders")
+    .select("*")
+    .eq("status", "Pending")
+    .order("reminder_date", { ascending: true })
+    .limit(5);
+
+  setNotifications(data || []);
+}
+
+async function loadActivities() {
   const activityList = [];
 
   const { data: customers } = await supabase
@@ -142,115 +178,63 @@ export default function Dashboard({ setPage }) {
   });
 
   setActivities(activityList);
-  }
-
-  
-  async function loadNotifications() {
-
-  const { data } = await supabase
-    .from("reminders")
-    .select("*")
-    .eq("status", "Pending")
-    .order("reminder_date", { ascending: true })
-    .limit(5);
-
-  if (data) {
-    setNotifications(data);
-  }
-
-  }
-
-  async function loadPendingReminders() {
-  const { count, error } = await supabase
-    .from("reminders")
-    .select("*", { count: "exact", head: true })
-    .eq("status", "Pending");
-
-  if (!error) {
-    setPendingReminders(count);
-  }
-}
-
-async function loadCompletedReminders() {
-  const { count, error } = await supabase
-    .from("reminders")
-    .select("*", { count: "exact", head: true })
-    .eq("status", "Completed");
-
-  if (!error) {
-    setCompletedReminders(count);
-  }
-}
-
-  async function loadTodayReminders() {
-
-  const today = new Date().toISOString().split("T")[0];
-
-  const { data, error } = await supabase
-    .from("reminders")
-    .select("*")
-    .eq("reminder_date", today)
-    .order("reminder_time", { ascending: true });
-
-  if (!error) {
-    setTodayReminders(data);
-  }
-
-  }
+      }
 
   return (
-    <div className="dashboard">
+  <div className="dashboard">
 
-      <h1>Sales Dashboard</h1>
+    <h1>Sales Dashboard</h1>
+    <p>Welcome to SalesPilot AI CRM</p>
 
-      <p>Welcome to SalesPilot AI CRM</p>
+    <div className="stats-container">
 
-      <div className="stats-container">
+      <StatCard
+        title="Revenue"
+        value={`₹${revenue.toLocaleString("en-IN")}`}
+        icon="💰"
+      />
 
-        <StatCard
-          title="Revenue"
-          value={`₹${revenue.toLocaleString("en-IN")}`}
-          icon="💰"
-        />
+      <StatCard
+        title="Customers"
+        value={customerCount}
+        icon="👥"
+      />
 
-        <StatCard
-          title="Customers"
-          value={customerCount}
-          icon="👥"
-        />
-        <StatCard
-         title="Leads"
-          value={leadCount}
-          icon="📈"
-         />
+      <StatCard
+        title="Leads"
+        value={leadCount}
+        icon="📈"
+      />
 
-        <StatCard
-          title="Deals"
-          value={dealCount}
-          icon="💼"
-        />
+      <StatCard
+        title="Deals"
+        value={dealCount}
+        icon="💼"
+      />
 
-        <StatCard
-          title="Conversion"
-          value={conversion}
-          icon="📈"
-        />
-        <StatCard
-  title="Pending"
-  value={pendingReminders}
-  icon="⏰"
-/>
+      <StatCard
+        title="Conversion"
+        value={conversion}
+        icon="📊"
+      />
 
-<StatCard
-  title="Completed"
-  value={completedReminders}
-  icon="✅"
-/>
+      <StatCard
+        title="Pending"
+        value={pendingReminders}
+        icon="⏰"
+      />
 
-      </div>
+      <StatCard
+        title="Completed"
+        value={completedReminders}
+        icon="✅"
+      />
 
-      <SalesChart />
-      <div
+    </div>
+
+    <SalesChart />
+
+    <div
   style={{
     marginTop: "30px",
     background: "#111827",
@@ -272,43 +256,55 @@ async function loadCompletedReminders() {
     }}
   >
 
-    <div style={{background:"#1e293b",padding:"20px",borderRadius:"12px"}}>
-      📈
-      <h3>Sales Growth</h3>
-      <p>Your leads are increasing steadily.</p>
+    <div
+      style={{
+        background: "#1e293b",
+        padding: "20px",
+        borderRadius: "12px"
+      }}
+    >
+      <h3>📈 Sales Growth</h3>
+      <p>Your sales pipeline is growing steadily.</p>
     </div>
 
-    <div style={{background:"#1e293b",padding:"20px",borderRadius:"12px"}}>
-      🔥
-      <h3>High Priority</h3>
-      <p>Follow up with pending high-value deals.</p>
+    <div
+      style={{
+        background: "#1e293b",
+        padding: "20px",
+        borderRadius: "12px"
+      }}
+    >
+      <h3>🔥 High Priority</h3>
+      <p>Follow up with high-score leads first.</p>
     </div>
 
-    <div style={{background:"#1e293b",padding:"20px",borderRadius:"12px"}}>
-      💰
-      <h3>Revenue</h3>
+    <div
+      style={{
+        background: "#1e293b",
+        padding: "20px",
+        borderRadius: "12px"
+      }}
+    >
+      <h3>💰 Revenue</h3>
       <p>Won deals contribute the highest revenue.</p>
     </div>
 
-    <div style={{background:"#1e293b",padding:"20px",borderRadius:"12px"}}>
-      ⭐
-      <h3>AI Suggestion</h3>
-      <p>Contact today's new leads within 24 hours.</p>
+    <div
+      style={{
+        background: "#1e293b",
+        padding: "20px",
+        borderRadius: "12px"
+      }}
+    >
+      <h3>⭐ AI Suggestion</h3>
+      <p>Contact new leads within 24 hours for maximum conversion.</p>
     </div>
 
   </div>
 
 </div>
- 
-  
-    
-    
-    
-    
-  
 
-
-  <div
+    <div
   style={{
     marginTop: "30px",
     background: "#111827",
@@ -359,23 +355,8 @@ async function loadCompletedReminders() {
   )}
 
 </div>
- 
-  
 
-  
-
-</div>    
-      
-<div
-  style={{
-    marginTop: "30px",
-    background: "#111827",
-    padding: "25px",
-    borderRadius: "15px",
-    border: "1px solid rgba(255,255,255,.08)"
-  }}
->
-  <div
+    <div
   style={{
     marginTop: "30px",
     background: "#111827",
@@ -391,43 +372,41 @@ async function loadCompletedReminders() {
 
   {todayReminders.length === 0 ? (
 
-  <p>No reminders for today.</p>
+    <p style={{ color: "#94a3b8" }}>
+      No reminders for today.
+    </p>
 
-) : (
+  ) : (
 
-  todayReminders.map((item) => (
+    todayReminders.map((item) => (
 
-    <div
-      key={item.id}
-      style={{
-        background:"#1e293b",
-        padding:"18px",
-        borderRadius:"10px",
-        marginBottom:"15px"
-      }}
-    >
-      <h3>{item.title}</h3>
+      <div
+        key={item.id}
+        style={{
+          background: "#1e293b",
+          padding: "18px",
+          borderRadius: "10px",
+          marginBottom: "15px"
+        }}
+      >
 
-      <p>⏰ {item.reminder_time}</p>
+        <h3>{item.title}</h3>
 
-      <p>🔥 {item.priority}</p>
+        <p>⏰ {item.reminder_time}</p>
 
-      <p>📌 {item.status}</p>
+        <p>🔥 {item.priority}</p>
 
-    </div>
+        <p>📌 {item.status}</p>
 
-  ))
+      </div>
 
-)}
-    
-      
-      
-    
-    
+    ))
+
+  )}
 
 </div>
 
-  <div
+    <div
   style={{
     marginTop: "30px",
     background: "#111827",
@@ -436,14 +415,21 @@ async function loadCompletedReminders() {
     border: "1px solid rgba(255,255,255,.08)",
   }}
 >
+
   <h2 style={{ marginBottom: "20px" }}>
     🏆 Top AI Leads
   </h2>
 
   {topLeads.length === 0 ? (
-    <p style={{ color: "#94a3b8" }}>No leads available.</p>
+
+    <p style={{ color: "#94a3b8" }}>
+      No leads available.
+    </p>
+
   ) : (
+
     topLeads.map((lead) => (
+
       <div
         key={lead.id}
         style={{
@@ -456,73 +442,85 @@ async function loadCompletedReminders() {
           marginBottom: "12px",
         }}
       >
+
         <div>
           <h3 style={{ margin: 0 }}>{lead.name}</h3>
+
           <p style={{ margin: "5px 0", color: "#94a3b8" }}>
             {lead.company}
           </p>
         </div>
 
         <div style={{ textAlign: "right" }}>
-          <div>
-  {lead.score >= 80 ? (
-    <span
-      style={{
-        background: "#16a34a",
-        color: "white",
-        padding: "4px 10px",
-        borderRadius: "20px",
-        fontSize: "12px",
-      }}
-    >
-      🔥 High Priority
-    </span>
-  ) : lead.score >= 50 ? (
-    <span
-      style={{
-        background: "#f59e0b",
-        color: "white",
-        padding: "4px 10px",
-        borderRadius: "20px",
-        fontSize: "12px",
-      }}
-    >
-      ⚡ Medium Priority
-    </span>
-  ) : (
-    <span
-      style={{
-        background: "#ef4444",
-        color: "white",
-        padding: "4px 10px",
-        borderRadius: "20px",
-        fontSize: "12px",
-      }}
-    >
-      ❄️ Low Priority
-    </span>
+
+          {lead.score >= 80 ? (
+            <span
+              style={{
+                background: "#16a34a",
+                color: "white",
+                padding: "4px 10px",
+                borderRadius: "20px",
+                fontSize: "12px",
+              }}
+            >
+              🔥 High Priority
+            </span>
+          ) : lead.score >= 50 ? (
+            <span
+              style={{
+                background: "#f59e0b",
+                color: "white",
+                padding: "4px 10px",
+                borderRadius: "20px",
+                fontSize: "12px",
+              }}
+            >
+              ⚡ Medium Priority
+            </span>
+          ) : (
+            <span
+              style={{
+                background: "#ef4444",
+                color: "white",
+                padding: "4px 10px",
+                borderRadius: "20px",
+                fontSize: "12px",
+              }}
+            >
+              ❄️ Low Priority
+            </span>
+          )}
+
+          <div
+            style={{
+              marginTop: "8px",
+              fontWeight: "bold",
+            }}
+          >
+            {lead.score}%
+          </div>
+
+          <br />
+
+          <small>
+            {lead.score >= 80
+              ? "📞 Call Immediately"
+              : lead.score >= 50
+              ? "📧 Send Follow-up"
+              : "⏳ Nurture Lead"}
+          </small>
+
+        </div>
+
+      </div>
+
+    ))
+
   )}
 
-  <div style={{ marginTop: "8px", fontWeight: "bold" }}>
-    {lead.score}%
-  </div>
 </div>
-            
-          
-          <br />
-          <small>
-  {lead.score >= 80
-    ? "📞 Call Immediately"
-    : lead.score >= 50
-    ? "📧 Send Follow-up"
-    : "⏳ Nurture Lead"}
-</small>
-        </div>
-      </div>
-    ))
-  )}
-</div>
-  <div
+
+    <div
   style={{
     marginTop: "30px",
     background: "#111827",
@@ -569,80 +567,81 @@ async function loadCompletedReminders() {
 
 </div>
 
-  <h2 style={{ marginBottom: "20px" }}>
-    ⚡ Quick Actions
-  </h2>
+<h2 style={{ marginTop: "35px", marginBottom: "20px" }}>
+  ⚡ Quick Actions
+</h2>
 
-  <div
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))",
+    gap: "15px"
+  }}
+>
+
+  <button
+    onClick={() => setPage("addCustomer")}
     style={{
-      display: "grid",
-      gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))",
-      gap: "15px"
+      padding:"16px",
+      background:"#2563eb",
+      color:"white",
+      border:"none",
+      borderRadius:"12px",
+      cursor:"pointer",
+      fontWeight:"bold"
     }}
   >
+    ➕ Add Customer
+  </button>
 
-    <button
-      onClick={() => setPage("addCustomer")}
-      style={{
-        padding:"16px",
-        background:"#2563eb",
-        color:"white",
-        border:"none",
-        borderRadius:"12px",
-        cursor:"pointer",
-        fontWeight:"bold"
-      }}
-    >
-      ➕ Add Customer
-    </button>
+  <button
+    onClick={() => setPage("addLead")}
+    style={{
+      padding:"16px",
+      background:"#10b981",
+      color:"white",
+      border:"none",
+      borderRadius:"12px",
+      cursor:"pointer",
+      fontWeight:"bold"
+    }}
+  >
+    📈 Add Lead
+  </button>
 
-    <button
-      onClick={() => setPage("addLead")}
-      style={{
-        padding:"16px",
-        background:"#10b981",
-        color:"white",
-        border:"none",
-        borderRadius:"12px",
-        cursor:"pointer",
-        fontWeight:"bold"
-      }}
-    >
-      📈 Add Lead
-    </button>
+  <button
+    onClick={() => setPage("addDeal")}
+    style={{
+      padding:"16px",
+      background:"#f59e0b",
+      color:"white",
+      border:"none",
+      borderRadius:"12px",
+      cursor:"pointer",
+      fontWeight:"bold"
+    }}
+  >
+    💼 Add Deal
+  </button>
 
-    <button
-      onClick={() => setPage("addDeal")}
-      style={{
-        padding:"16px",
-        background:"#f59e0b",
-        color:"white",
-        border:"none",
-        borderRadius:"12px",
-        cursor:"pointer",
-        fontWeight:"bold"
-      }}
-    >
-      💼 Add Deal
-    </button>
-
-    <button 
-      onClick={() => setPage("ai")}
-      style={{
-        padding:"16px",
-        background:"#7c3aed",
-        color:"white",
-        border:"none",
-        borderRadius:"12px",
-        cursor:"pointer",
-        fontWeight:"bold"
-      }}
-    >
-      🤖 Open AI
-    </button>
-
-  </div>
+  <button
+    onClick={() => setPage("ai")}
+    style={{
+      padding:"16px",
+      background:"#7c3aed",
+      color:"white",
+      border:"none",
+      borderRadius:"12px",
+      cursor:"pointer",
+      fontWeight:"bold"
+    }}
+  >
+    🤖 Open AI
+  </button>
 
 </div>
-     );
+
+</div>
+);
 }
+  
