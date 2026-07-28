@@ -56,6 +56,7 @@ export default function AddLead({
           follow_up_date: followUpDate,
           assigned_to: assignedTo,
           notes,
+          score: score,
         })
         .eq("id", selectedLead.id);
 
