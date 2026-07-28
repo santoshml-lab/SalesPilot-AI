@@ -387,11 +387,59 @@ async function loadCompletedReminders() {
         </div>
 
         <div style={{ textAlign: "right" }}>
-          <strong style={{ color: "#22c55e" }}>
-            {lead.score}%
-          </strong>
+          <div>
+  {lead.score >= 80 ? (
+    <span
+      style={{
+        background: "#16a34a",
+        color: "white",
+        padding: "4px 10px",
+        borderRadius: "20px",
+        fontSize: "12px",
+      }}
+    >
+      🔥 High Priority
+    </span>
+  ) : lead.score >= 50 ? (
+    <span
+      style={{
+        background: "#f59e0b",
+        color: "white",
+        padding: "4px 10px",
+        borderRadius: "20px",
+        fontSize: "12px",
+      }}
+    >
+      ⚡ Medium Priority
+    </span>
+  ) : (
+    <span
+      style={{
+        background: "#ef4444",
+        color: "white",
+        padding: "4px 10px",
+        borderRadius: "20px",
+        fontSize: "12px",
+      }}
+    >
+      ❄️ Low Priority
+    </span>
+  )}
+
+  <div style={{ marginTop: "8px", fontWeight: "bold" }}>
+    {lead.score}%
+  </div>
+</div>
+            
+          
           <br />
-          <small>{lead.status}</small>
+          <small>
+  {lead.score >= 80
+    ? "📞 Call Immediately"
+    : lead.score >= 50
+    ? "📧 Send Follow-up"
+    : "⏳ Nurture Lead"}
+</small>
         </div>
       </div>
     ))
