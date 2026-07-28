@@ -116,7 +116,21 @@ export default function Leads({
                 <td>{lead.company}</td>
                 <td>{lead.source}</td>
                 <td>{lead.status}</td>
-                <td>{lead.score}</td>
+                <td>
+  {lead.score >= 80 ? (
+    <span style={{ color: "#22c55e", fontWeight: "bold" }}>
+      🟢 {lead.score}%
+    </span>
+  ) : lead.score >= 50 ? (
+    <span style={{ color: "#f59e0b", fontWeight: "bold" }}>
+      🟡 {lead.score}%
+    </span>
+  ) : (
+    <span style={{ color: "#ef4444", fontWeight: "bold" }}>
+      🔴 {lead.score}%
+    </span>
+  )}
+</td>
 
                                 <td
                   style={{
