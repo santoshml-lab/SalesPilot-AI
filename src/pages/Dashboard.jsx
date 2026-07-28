@@ -15,6 +15,7 @@ export default function Dashboard({ setPage }) {
   const [pendingReminders, setPendingReminders] = useState(0);
   const [completedReminders, setCompletedReminders] = useState(0);
   const [todayReminders, setTodayReminders] = useState([]);
+  const [topLeads, setTopLeads] = useState([]);
 
   useEffect(() => {
     loadCustomerCount();
@@ -24,7 +25,9 @@ export default function Dashboard({ setPage }) {
     loadPendingReminders();
     loadCompletedReminders();
     loadTodayReminders();
+    loadTopLeads();
   }, []);
+  
 
   async function loadCustomerCount() {
     const { count, error } = await supabase
@@ -82,6 +85,17 @@ export default function Dashboard({ setPage }) {
     } else {
       setConversion("0%");
     }
+  }
+  async function loadTopLeads() {
+  const { data, error } = await supabase
+    .from("leads")
+    .select("*")
+    .order("score", { ascending: false })
+    .limit(5);
+
+  if (!error) {
+    setTopLeads(data);
+  }
   }
 
   async function loadPendingReminders() {
@@ -334,6 +348,54 @@ async function loadCompletedReminders() {
     
     
 
+</div>
+
+  <div
+  style={{
+    marginTop: "30px",
+    background: "#111827",
+    padding: "25px",
+    borderRadius: "15px",
+    border: "1px solid rgba(255,255,255,.08)",
+  }}
+>
+  <h2 style={{ marginBottom: "20px" }}>
+    🏆 Top AI Leads
+  </h2>
+
+  {topLeads.length === 0 ? (
+    <p style={{ color: "#94a3b8" }}>No leads available.</p>
+  ) : (
+    topLeads.map((lead) => (
+      <div
+        key={lead.id}
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          background: "#1e293b",
+          padding: "15px",
+          borderRadius: "10px",
+          marginBottom: "12px",
+        }}
+      >
+        <div>
+          <h3 style={{ margin: 0 }}>{lead.name}</h3>
+          <p style={{ margin: "5px 0", color: "#94a3b8" }}>
+            {lead.company}
+          </p>
+        </div>
+
+        <div style={{ textAlign: "right" }}>
+          <strong style={{ color: "#22c55e" }}>
+            {lead.score}%
+          </strong>
+          <br />
+          <small>{lead.status}</small>
+        </div>
+      </div>
+    ))
+  )}
 </div>
 
   <h2 style={{ marginBottom: "20px" }}>
