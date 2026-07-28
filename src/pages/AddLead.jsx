@@ -36,16 +36,52 @@ export default function AddLead({
 
   async function saveLead() {
 
-    if (!name || !company) {
-      alert("Please fill all fields");
-      return;
+  if (!name || !company) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  if (selectedLead) {
+
+    const { error } = await supabase
+      .from("leads")
+      .update({
+        name,
+        company,
+        email,
+        phone,
+        source,
+        status,
+        score,
+        follow_up_date: followUpDate,
+        assigned_to: assignedTo,
+        notes,
+      })
+      .eq("id", selectedLead.id);
+
+    if (error) {
+      alert(error.message);
+    } else {
+      alert("Lead Updated Successfully");
+      setSelectedLead(null);
+      setPage("leads");
     }
 
-    if (selectedLead) {
+  } else {
 
-      const { error } = await supabase
-        .from("leads")
-        .update({
+    let autoScore = 50;
+
+    if (status === "New") autoScore = 60;
+    if (status === "Contacted") autoScore = 75;
+    if (status === "Qualified") autoScore = 90;
+    if (status === "Proposal") autoScore = 85;
+    if (status === "Won") autoScore = 100;
+    if (status === "Lost") autoScore = 20;
+
+    const { error } = await supabase
+      .from("leads")
+      .insert([
+        {
           name,
           company,
           email,
@@ -56,55 +92,19 @@ export default function AddLead({
           follow_up_date: followUpDate,
           assigned_to: assignedTo,
           notes,
-          
-        })
-        .eq("id", selectedLead.id);
+        },
+      ]);
 
-      if (error) {
-        alert(error.message);
-      } else {
-        alert("Lead Updated Successfully");
-        setSelectedLead(null);
-        setPage("leads");
-      }
-
+    if (error) {
+      alert(error.message);
     } else {
-      let autoScore = 50;
-
-if (status === "New") autoScore = 60;
-if (status === "Contacted") autoScore = 75;
-if (status === "Qualified") autoScore = 90;
-if (status === "Proposal") autoScore = 85;
-if (status === "Won") autoScore = 100;
-if (status === "Lost") autoScore = 20;
-
-      
-        
-        
-    .insert([
-          {
-            name,
-            company,
-            email,
-            phone,
-            source,
-            status,
-            score,
-            follow_up_date: followUpDate,
-            assigned_to: assignedTo,
-            notes,
-          },
-        ]);
-
-      if (error) {
-        alert(error.message);
-      } else {
-        alert("Lead Added Successfully");
-        setPage("leads");
-      }
-
+      alert("Lead Added Successfully");
+      setPage("leads");
     }
+
   }
+  }
+  
 
     return (
     <div
@@ -191,13 +191,10 @@ if (status === "Lost") autoScore = 20;
 
         <br /><br />
 
-        <input
-          type="number"
-          className="search-input"
-          placeholder="Lead Score"
-          value={score}
-          onChange={(e) => setScore(e.target.value)}
-        />
+        
+          
+          
+        
 
         <br /><br />
 
