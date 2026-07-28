@@ -309,43 +309,59 @@ async function loadCompletedReminders() {
   }}
 >
 
+  <div
+  style={{
+    marginTop: "30px",
+    background: "#111827",
+    padding: "25px",
+    borderRadius: "15px",
+    border: "1px solid rgba(255,255,255,.08)"
+  }}
+>
+
   <h2 style={{ marginBottom: "20px" }}>
-    📋 Recent Activity
+    📋 Recent Activity Timeline
   </h2>
 
-  <div style={{ display: "grid", gap: "15px" }}>
+  {activities.length === 0 ? (
 
-    <div style={{
-      background:"#1e293b",
-      padding:"15px",
-      borderRadius:"10px"
-    }}>
-      👤 New customer added successfully.
-    </div>
+    <p style={{ color: "#94a3b8" }}>
+      No recent activity.
+    </p>
 
-    <div style={{
-      background:"#1e293b",
-      padding:"15px",
-      borderRadius:"10px"
-    }}>
-      📈 New lead created.
-    </div>
+  ) : (
 
-    <div style={{
-      background:"#1e293b",
-      padding:"15px",
-      borderRadius:"10px"
-    }}>
-      💼 Deal updated.
-    </div>
+    activities.map((activity, index) => (
 
-    <div style={{
-      background:"#1e293b",
-      padding:"15px",
-      borderRadius:"10px"
-    }}>
-      🤖 AI Assistant generated sales insights.
-    </div>
+      <div
+        key={index}
+        style={{
+          background: "#1e293b",
+          padding: "15px",
+          borderRadius: "10px",
+          marginBottom: "12px",
+          borderLeft: "4px solid #2563eb"
+        }}
+      >
+
+        <div
+          style={{
+            fontWeight: "bold",
+            color: "white"
+          }}
+        >
+          {activity.text}
+        </div>
+
+      </div>
+
+    ))
+
+  )}
+
+</div>
+ 
+  
 
   </div>
 
