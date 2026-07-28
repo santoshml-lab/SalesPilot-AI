@@ -9,6 +9,7 @@ export default function Leads({
 
   const [leads, setLeads] = useState([]);
   const [search, setSearch] = useState("");
+  const [analysis, setAnalysis] = useState("");
 
   useEffect(() => {
     fetchLeads();
@@ -41,6 +42,38 @@ export default function Leads({
     } else {
       fetchLeads();
     }
+  }
+  async function analyzeLead(lead) {
+
+  const prompt = `
+Analyze this sales lead.
+
+Lead Name: ${lead.name}
+Company: ${lead.company}
+Status: ${lead.status}
+Score: ${lead.score}
+
+Provide:
+
+1. Conversion Probability
+2. Risk Level
+3. Next Best Action
+4. Best Follow-up Time
+`;
+
+  const res = await fetch("https://salespilot-l1d3.onrender.com/chat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      prompt,
+    }),
+  });
+
+  const data = await res.json();
+
+  setAnalysis(data.response);
   }
 
   return (
