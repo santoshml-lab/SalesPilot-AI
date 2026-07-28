@@ -52,11 +52,11 @@ export default function AddLead({
           phone,
           source,
           status,
-          score,
+          score: autoScore,
           follow_up_date: followUpDate,
           assigned_to: assignedTo,
           notes,
-          score: score,
+          
         })
         .eq("id", selectedLead.id);
 
@@ -69,16 +69,19 @@ export default function AddLead({
       }
 
     } else {
+      let autoScore = 50;
 
-      const { error } = await supabase
-        .from("leads")
-        let score = 50;
+if (status === "New") autoScore = 60;
+if (status === "Contacted") autoScore = 75;
+if (status === "Qualified") autoScore = 90;
+if (status === "Proposal") autoScore = 85;
+if (status === "Won") autoScore = 100;
+if (status === "Lost") autoScore = 20;
 
-if (status === "New") score = 60;
-if (status === "Contacted") score = 75;
-if (status === "Qualified") score = 90;
-if (status === "Lost") score = 20;
-        .insert([
+      
+        
+        
+    .insert([
           {
             name,
             company,
