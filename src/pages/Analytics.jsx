@@ -79,14 +79,7 @@ const barData = [
 ];
 
   return (
-    <div
-      className="customers-page"
-      style={{ marginTop: "90px", padding: "30px" }}
-    >
-
-      <h1>📊 Analytics Dashboard</h1>
-
-      <div
+          <div
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))",
@@ -94,7 +87,6 @@ const barData = [
           marginTop: "30px",
         }}
       >
-
         <div className="customer-card">
           <h3>👥 Customers</h3>
           <h1>{customers}</h1>
@@ -129,59 +121,57 @@ const barData = [
           <h3>🎯 Conversion</h3>
           <h1>{conversion}%</h1>
         </div>
-        <div
-  style={{
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: "25px",
-    marginTop: "40px",
-  }}
->
-
-  <div className="customer-card">
-    <h2>📊 Business Overview</h2>
-
-    <ResponsiveContainer width="100%" height={320}>
-      <BarChart data={barData}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Bar dataKey="value" fill="#3b82f6" />
-      </BarChart>
-    </ResponsiveContainer>
-
-  </div>
-
-  <div className="customer-card">
-    <h2>🥧 Deal Status</h2>
-
-    <ResponsiveContainer width="100%" height={320}>
-      <PieChart>
-        <Pie
-          data={pieData}
-          dataKey="value"
-          outerRadius={110}
-          label
-        >
-          {pieData.map((entry, index) => (
-            <Cell
-              key={index}
-              fill={COLORS[index]}
-            />
-          ))}
-        </Pie>
-
-        <Tooltip />
-      </PieChart>
-    </ResponsiveContainer>
-
-  </div>
-
-</div>0
-
       </div>
 
-    </div>
-  );
-}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "25px",
+          marginTop: "40px",
+        }}
+      >
+        <div className="customer-card">
+          <h2>📊 Business Overview</h2>
+
+          <ResponsiveContainer width="100%" height={320}>
+            <BarChart data={barData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey="value" fill="#3b82f6" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className="customer-card">
+          <h2>🥧 Deal Status</h2>
+
+          <ResponsiveContainer width="100%" height={320}>
+            <PieChart>
+              <Pie
+                data={pieData}
+                dataKey="value"
+                outerRadius={110}
+                label
+              >
+                {pieData.map((entry, index) => (
+                  <Cell
+                    key={index}
+                    fill={COLORS[index]}
+                  />
+                ))}
+              </Pie>
+
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+      
+      
+    
+
+      
+          
