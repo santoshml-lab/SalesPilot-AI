@@ -234,7 +234,15 @@ async function loadActivities() {
 </div>
     
 
-    <div className="stats-container">
+    <div
+  className="stats-container"
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))",
+    gap: "20px",
+    marginBottom: "35px",
+  }}
+>
 
       <StatCard
         title="Revenue"
