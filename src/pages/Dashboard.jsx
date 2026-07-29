@@ -352,27 +352,14 @@ async function loadActivities() {
   </button>
 </div>
 
-    <SalesChart />
+    
 
-    <div
-  style={{
-    marginTop: "20px",
-    background: "#1e293b",
-    padding: "20px",
-    borderRadius: "12px",
-    color: "white",
-  }}
->
-  <h2>🤖 AI Revenue Forecast</h2>
+    
+  
 
-  <h1 style={{ color: "#22c55e" }}>
-    ₹{forecastRevenue.toLocaleString("en-IN")}
-  </h1>
 
-  <p>
-    Estimated next month's revenue based on current won deals.
-  </p>
-</div>
+
+  
 
     <div
   style={{
