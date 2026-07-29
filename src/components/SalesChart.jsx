@@ -12,12 +12,20 @@ import {
 } from "recharts";
 
 
-const [data, setData] = useState([]);
-useEffect(() => {
-  loadChart();
-}, []);
+
+
+
+       
+
+  
+
 
 async function loadChart() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    loadChart();
+  }, []);
   const { data: deals } = await supabase
     .from("deals")
     .select("amount, status, created_at");
