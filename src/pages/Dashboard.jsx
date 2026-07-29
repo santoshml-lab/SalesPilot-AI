@@ -360,8 +360,8 @@ async function loadActivities() {
         
         
         
-      <p>Your sales pipeline is growing steadily.</p>
-    </div>
+      
+    
 
     <div className="ai-card">
       
