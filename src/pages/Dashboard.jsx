@@ -693,9 +693,15 @@ async function loadActivities() {
   )}
 
 </div>
+
+</div>
+
+);
+
+}
       
 
   
-);
-}
+
+
   
