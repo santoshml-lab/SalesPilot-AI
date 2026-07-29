@@ -8,6 +8,7 @@ export default function AIAssistant() {
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
   const [emailType, setEmailType] = useState("Follow-up Email");
+  const [history, setHistory] = useState([]);
 
   useEffect(() => {
 
@@ -79,6 +80,14 @@ Requirements:
 
       if (res.ok) {
         setResponse(data.response);
+        setHistory((prev) => [
+  {
+    prompt: customPrompt || prompt,
+    response: data.response,
+    time: new Date().toLocaleString(),
+  },
+  ...prev,
+]);
       } else {
         setResponse(data.detail || "Something went wrong.");
       }
@@ -383,6 +392,44 @@ Requirements:
       </button>
     </div>
 
+  </div>
+)}
+    {history.length > 0 && (
+  <div
+    style={{
+      marginTop: "30px",
+      background: "#111827",
+      padding: "20px",
+      borderRadius: "15px",
+    }}
+  >
+    <h2>🕒 AI Chat History</h2>
+
+    {history.map((item, index) => (
+      <div
+        key={index}
+        style={{
+          marginTop: "15px",
+          padding: "15px",
+          background: "#1e293b",
+          borderRadius: "10px",
+        }}
+      >
+        <p><strong>Prompt:</strong> {item.prompt}</p>
+        <p
+          style={{
+            marginTop: "10px",
+            whiteSpace: "pre-wrap",
+          }}
+        >
+          {item.response}
+        </p>
+
+        <small style={{ color: "#94a3b8" }}>
+          {item.time}
+        </small>
+      </div>
+    ))}
   </div>
 )}
 
