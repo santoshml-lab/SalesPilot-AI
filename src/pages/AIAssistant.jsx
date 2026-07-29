@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "../styles/customers.css";
 
+
 export default function AIAssistant() {
 
   const [prompt, setPrompt] = useState("");
