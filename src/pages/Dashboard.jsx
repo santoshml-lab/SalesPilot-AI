@@ -345,54 +345,50 @@ async function loadActivities() {
     🤖 AI Business Insights
   </h2>
 
-  <div
-    style={{
-      display: "grid",
-      gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
-      gap: "20px"
-    }}
-  >
+  <div className="ai-grid">
+    
+      
+      
+      
 
     <div
       style={{
         background: "#1e293b",
         padding: "20px",
         borderRadius: "12px"
-      }}
-    >
+      
       <h3>📈 Sales Growth</h3>
       <p>Your sales pipeline is growing steadily.</p>
     </div>
 
-    <div
-      style={{
-        background: "#1e293b",
-        padding: "20px",
-        borderRadius: "12px"
-      }}
-    >
+    <div className="ai-card">
+      
+        
+        
+        
+      
+    
       <h3>🔥 High Priority</h3>
       <p>Follow up with high-score leads first.</p>
     </div>
 
-    <div
-      style={{
-        background: "#1e293b",
-        padding: "20px",
-        borderRadius: "12px"
-      }}
-    >
+    <div className="ai-card">
+      
+        
+        
+        
+      
+    
       <h3>💰 Revenue</h3>
       <p>Won deals contribute the highest revenue.</p>
     </div>
 
-    <div
-      style={{
-        background: "#1e293b",
-        padding: "20px",
-        borderRadius: "12px"
-      }}
-    >
+    <div className="ai-card">
+      
+        
+        
+        
+    
       <h3>⭐ AI Suggestion</h3>
       <p>Contact new leads within 24 hours for maximum conversion.</p>
     </div>
