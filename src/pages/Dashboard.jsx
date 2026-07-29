@@ -189,8 +189,50 @@ async function loadActivities() {
   return (
   <div className="dashboard">
 
-    <h1>Sales Dashboard</h1>
-    <p>Welcome to SalesPilot AI CRM</p>
+    <div
+  style={{
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: "30px",
+    flexWrap: "wrap",
+    gap: "20px",
+  }}
+>
+  <div>
+    <h1
+      style={{
+        margin: 0,
+        fontSize: "34px",
+        fontWeight: "700",
+      }}
+    >
+      📊 Sales Dashboard
+    </h1>
+
+    <p
+      style={{
+        color: "#94a3b8",
+        marginTop: "8px",
+      }}
+    >
+      Welcome back! Here's today's business overview.
+    </p>
+  </div>
+
+  <div
+    style={{
+      background: "#1e293b",
+      padding: "12px 20px",
+      borderRadius: "12px",
+      color: "#22c55e",
+      fontWeight: "bold",
+    }}
+  >
+    🟢 CRM Online
+  </div>
+</div>
+    
 
     <div className="stats-container">
 
