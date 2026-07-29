@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import "../styles/customers.css";
 
-
 export default function AIAssistant() {
 
   const [prompt, setPrompt] = useState("");
@@ -44,16 +43,7 @@ Requirements:
 - Keep it concise and business-friendly.
 `;
 
-
-
-
-
-
-
-
-
-
-    if (!finalPrompt.trim()) {
+    if (!prompt.trim() && !customPrompt) {
       alert("Please enter a prompt");
       return;
     }
@@ -79,224 +69,218 @@ Requirements:
       const data = await res.json();
 
       if (res.ok) {
+
         setResponse(data.response);
+
         setHistory((prev) => [
-  {
-    prompt: customPrompt || prompt,
-    response: data.response,
-    time: new Date().toLocaleString(),
-  },
-  ...prev,
-]);
+          {
+            prompt: customPrompt || prompt,
+            response: data.response,
+            time: new Date().toLocaleString(),
+          },
+          ...prev,
+        ]);
+
       } else {
         setResponse(data.detail || "Something went wrong.");
       }
 
     } catch (error) {
+
       console.error(error);
       setResponse("Unable to connect to AI server.");
+
     } finally {
+
       setLoading(false);
+
     }
 
   }
 
   return (
 
-        <div
-      className="customers-page"
-      style={{ marginTop: "80px" }}
-    >
-
-      <h1>🤖 SalesPilot AI Assistant</h1>
-       <div style={{ marginBottom: "20px" }}>
-
-  <label style={{ color: "white", fontWeight: "bold" }}>
-    Email Type
-  </label>
-
-  <select
-    className="search-input"
-    value={emailType}
-    onChange={(e) => setEmailType(e.target.value)}
-  >
-    <option>Follow-up Email</option>
-    <option>Cold Outreach</option>
-    <option>Proposal Email</option>
-    <option>Meeting Request</option>
-    <option>Thank You Email</option>
-  </select>
-
-</div>   
-
-      <p
-        style={{
-          color: "#94a3b8",
-          marginBottom: "20px",
-          fontSize: "16px",
-        }}
-      >
-        Your intelligent AI assistant for sales, customer engagement,
-        lead management, deal insights, email writing,
-        follow-ups, and business growth.
-      </p>
-      <div
-  style={{
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))",
-    gap: "12px",
-    marginBottom: "20px",
-  }}
->
-
-  <button
-    className="search-input"
-    onClick={() =>
-      setPrompt("Write a professional follow-up email for a customer after a product demo.")
-    }
-  >
-    ✉️ Follow-up
-  </button>
-
-  <button
-    className="search-input"
-    onClick={() =>
-      setPrompt("Generate a cold outreach email introducing SalesPilot AI CRM.")
-    }
-  >
-    📩 Cold Email
-  </button>
-
-  <button
-    className="search-input"
-    onClick={() =>
-      setPrompt("Write a business proposal email for CRM software.")
-    }
-  >
-    📄 Proposal
-  </button>
-
-  <button
-    className="search-input"
-    onClick={() =>
-      setPrompt("Generate a meeting request email for a sales discussion.")
-    }
-  >
-    🤝 Meeting
-  </button>
-
-</div>    
-          <div
-  style={{
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit,minmax(170px,1fr))",
-    gap: "12px",
-    marginBottom: "20px",
-  }}
->
-
-  <button className="search-input"
-    onClick={() => {
-      setEmailType("Follow-up Email");
-      setPrompt("Write a professional follow-up email.");
-    }}>
-    ✉️ Email
-  </button>
-
-  <button className="search-input"
-    onClick={() => {
-      setPrompt("Generate a professional sales call script.");
-    }}>
-    📞 Call Script
-  </button>
-
-  <button className="search-input"
-    onClick={() => {
-      setPrompt("Generate a business proposal for CRM software.");
-    }}>
-    📄 Proposal
-  </button>
-
-  <button className="search-input"
-    onClick={() => {
-      setPrompt("Generate a meeting summary.");
-    }}>
-    📅 Meeting Summary
-  </button>
-
-  <button className="search-input"
-    onClick={() => {
-      setPrompt("Write a WhatsApp follow-up message.");
-    }}>
-    💬 WhatsApp
-  </button>
-
-  <button className="search-input"
-    onClick={() => {
-      setPrompt("Analyze sales performance and suggest improvements.");
-    }}>
-    📊 Sales Analysis
-  </button>
-
-</div>
-
-      <textarea
-        value={prompt}
-        onChange={(e) => setPrompt(e.target.value)}
-        placeholder="Ask about sales, customers, emails, follow-ups, lead scoring, deals, business strategy..."
-        style={{
-          width: "100%",
-          height: "180px",
-          padding: "15px",
-          borderRadius: "12px",
-          background: "#1e293b",
-          color: "white",
-          border: "1px solid rgba(255,255,255,.1)",
-        }}
-      />
-
-      <button
-        onClick={() => generateAI()}
-        disabled={loading}
-        style={{
-          marginTop: "20px",
-          padding: "12px 25px",
-          background: "#2563eb",
-          color: "white",
-          border: "none",
-          borderRadius: "10px",
-          cursor: "pointer",
-        }}
-      >
-        {loading ? "Thinking..." : "Generate AI Response"}
-      </button>
-
-      {response && (
   <div
-    style={{
-      marginTop: "25px",
-      background: "#111827",
-      borderRadius: "15px",
-      padding: "25px",
-      border: "1px solid rgba(255,255,255,.08)",
-    }}
+    className="customers-page"
+    style={{ marginTop: "80px" }}
   >
 
-    <h2 style={{ marginBottom: "15px" }}>
-      ✉️ AI Generated Email
-    </h2>
+    <h1>🤖 SalesPilot AI Assistant</h1>
+
+    <div style={{ marginBottom: "20px" }}>
+      <label style={{ color: "white", fontWeight: "bold" }}>
+        Email Type
+      </label>
+
+      <select
+        className="search-input"
+        value={emailType}
+        onChange={(e) => setEmailType(e.target.value)}
+      >
+        <option>Follow-up Email</option>
+        <option>Cold Outreach</option>
+        <option>Proposal Email</option>
+        <option>Meeting Request</option>
+        <option>Thank You Email</option>
+      </select>
+    </div>
+
+    <p
+      style={{
+        color: "#94a3b8",
+        marginBottom: "20px",
+        fontSize: "16px",
+      }}
+    >
+      Your intelligent AI assistant for sales, customer engagement,
+      lead management, deal insights, email writing,
+      follow-ups, and business growth.
+    </p>
 
     <div
       style={{
-        background: "#1e293b",
-        padding: "20px",
-        borderRadius: "10px",
-        whiteSpace: "pre-wrap",
-        lineHeight: "1.8",
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))",
+        gap: "12px",
+        marginBottom: "20px",
       }}
     >
-      {response}
+
+      <button
+        className="search-input"
+        onClick={() =>
+          setPrompt("Write a professional follow-up email for a customer after a product demo.")
+        }
+      >
+        ✉️ Follow-up
+      </button>
+
+      <button
+        className="search-input"
+        onClick={() =>
+          setPrompt("Generate a cold outreach email introducing SalesPilot AI CRM.")
+        }
+      >
+        📩 Cold Email
+      </button>
+
+      <button
+        className="search-input"
+        onClick={() =>
+          setPrompt("Write a business proposal email for CRM software.")
+        }
+      >
+        📄 Proposal
+      </button>
+
+      <button
+        className="search-input"
+        onClick={() =>
+          setPrompt("Generate a meeting request email for a sales discussion.")
+        }
+      >
+        🤝 Meeting
+      </button>
+
     </div>
+
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit,minmax(170px,1fr))",
+        gap: "12px",
+        marginBottom: "20px",
+      }}
+    >
+
+      <button
+        className="search-input"
+        onClick={() => {
+          setEmailType("Follow-up Email");
+          setPrompt("Write a professional follow-up email.");
+        }}
+      >
+        ✉️ Email
+      </button>
+
+      <button
+        className="search-input"
+        onClick={() => {
+          setPrompt("Generate a professional sales call script.");
+        }}
+      >
+        📞 Call Script
+      </button>
+
+      <button
+        className="search-input"
+        onClick={() => {
+          setPrompt("Generate a business proposal for CRM software.");
+        }}
+      >
+        📄 Proposal
+      </button>
+
+      <button
+        className="search-input"
+        onClick={() => {
+          setPrompt("Generate a meeting summary.");
+        }}
+      >
+        📅 Meeting Summary
+      </button>
+
+      <button
+        className="search-input"
+        onClick={() => {
+          setPrompt("Write a WhatsApp follow-up message.");
+        }}
+      >
+        💬 WhatsApp
+      </button>
+
+      <button
+        className="search-input"
+        onClick={() => {
+          setPrompt("Analyze sales performance and suggest improvements.");
+        }}
+      >
+        📊 Sales Analysis
+      </button>
+
+    </div>
+
+    <textarea
+      value={prompt}
+      onChange={(e) => setPrompt(e.target.value)}
+      placeholder="Ask about sales, customers, emails, follow-ups, lead scoring, deals, business strategy..."
+      style={{
+        width: "100%",
+        height: "180px",
+        padding: "15px",
+        borderRadius: "12px",
+        background: "#1e293b",
+        color: "white",
+        border: "1px solid rgba(255,255,255,.1)",
+      }}
+    />
+
+    <button
+      onClick={() => generateAI()}
+      disabled={loading}
+      style={{
+        marginTop: "20px",
+        padding: "12px 25px",
+        background: "#2563eb",
+        color: "white",
+        border: "none",
+        borderRadius: "10px",
+        cursor: "pointer",
+      }}
+    >
+      {loading ? "Thinking..." : "Generate AI Response"}
+    </button>
+
     {response && (
   <div
     style={{
@@ -323,16 +307,15 @@ Requirements:
       {response}
     </div>
 
-    
-
     <div
       style={{
         display: "flex",
         gap: "10px",
-        marginTop: "15px",
+        marginTop: "20px",
         flexWrap: "wrap",
       }}
     >
+
       <button
         onClick={() => {
           navigator.clipboard.writeText(response);
@@ -368,7 +351,10 @@ Requirements:
 
       <button
         onClick={() => {
-          const blob = new Blob([response], { type: "text/plain" });
+          const blob = new Blob([response], {
+            type: "text/plain",
+          });
+
           const url = URL.createObjectURL(blob);
 
           const a = document.createElement("a");
@@ -390,6 +376,7 @@ Requirements:
       >
         ⬇ Download
       </button>
+
     </div>
 
   </div>
@@ -401,31 +388,44 @@ Requirements:
       background: "#111827",
       padding: "20px",
       borderRadius: "15px",
+      border: "1px solid rgba(255,255,255,.08)",
     }}
   >
-    <h2>🕒 AI Chat History</h2>
+    <h2 style={{ marginBottom: "20px" }}>
+      🕒 AI Chat History
+    </h2>
 
     {history.map((item, index) => (
       <div
         key={index}
         style={{
-          marginTop: "15px",
-          padding: "15px",
           background: "#1e293b",
+          padding: "18px",
           borderRadius: "10px",
+          marginBottom: "15px",
         }}
       >
-        <p><strong>Prompt:</strong> {item.prompt}</p>
+        <p>
+          <strong>Prompt:</strong> {item.prompt}
+        </p>
+
         <p
           style={{
-            marginTop: "10px",
+            marginTop: "12px",
             whiteSpace: "pre-wrap",
+            lineHeight: "1.7",
           }}
         >
           {item.response}
         </p>
 
-        <small style={{ color: "#94a3b8" }}>
+        <small
+          style={{
+            color: "#94a3b8",
+            display: "block",
+            marginTop: "10px",
+          }}
+        >
           {item.time}
         </small>
       </div>
@@ -433,8 +433,10 @@ Requirements:
   </div>
 )}
 
-  </div>
-)}
+</div>
+
+);
+}
         
           
             
