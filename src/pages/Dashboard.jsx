@@ -3,6 +3,7 @@ import { supabase } from "../lib/supabase";
 
 import "../styles/dashboard.css";
 import StatCard from "../components/StatCard";
+import SalesChart from "../components/SalesChart";
 
 
 export default function Dashboard({ setPage }) {
@@ -328,7 +329,8 @@ async function loadActivities() {
   </button>
 
 </div>
-
+    
+<SalesChart />
   
 
     <div
