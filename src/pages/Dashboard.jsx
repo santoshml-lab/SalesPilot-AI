@@ -356,6 +356,7 @@ async function loadActivities() {
         background: "#1e293b",
         padding: "20px",
         borderRadius: "12px"
+        border: "1px solid rgba(255,255,2"  
       
       <h3>📈 Sales Growth</h3>
       <p>Your sales pipeline is growing steadily.</p>
