@@ -287,6 +287,17 @@ async function loadActivities() {
       />
 
     </div>
+    <h2
+  style={{
+    marginTop: "30px",
+    marginBottom: "20px",
+    fontSize: "24px",
+    fontWeight: "700",
+    color: "white",
+  }}
+>
+  ⚡ Quick Actions
+</h2>
     <div
   style={{
     display: "grid",
