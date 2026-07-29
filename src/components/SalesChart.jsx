@@ -1,4 +1,6 @@
 import "../styles/chart.css";
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabase";
 import {
   LineChart,
   Line,
@@ -10,28 +12,38 @@ import {
 } from "recharts";
 
 
-const data = [
-  {
-    month: "Jan",
-    sales: 50000
-  },
-  {
-    month: "Feb",
-    sales: 80000
-  },
-  {
-    month: "Mar",
-    sales: 120000
-  },
-  {
-    month: "Apr",
-    sales: 150000
-  },
-  {
-    month: "May",
-    sales: 200000
-  }
-];
+const [data, setData] = useState([]);
+useEffect(() => {
+  loadChart();
+}, []);
+
+async function loadChart() {
+  const { data: deals } = await supabase
+    .from("deals")
+    .select("amount, status, created_at");
+
+  if (!deals) return;
+
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  const result = {};
+
+  deals.forEach((deal) => {
+    if (deal.status !== "Won") return;
+
+    const month = months[new Date(deal.created_at).getMonth()];
+
+    result[month] = (result[month] || 0) + Number(deal.amount);
+  });
+
+  setData(
+    Object.keys(result).map((month) => ({
+      month,
+      sales: result[month],
+    }))
+  );
+}
 
 
 export default function SalesChart(){
@@ -53,9 +65,11 @@ export default function SalesChart(){
 
           <XAxis dataKey="month" />
 
-          <YAxis />
+          <YAxis tickFormatter={(value) => `₹${value / 1000}k`} />
 
-          <Tooltip />
+          <Tooltip
+  formatter={(value) => [`₹${Number(value).toLocaleString("en-IN")}`, "Sales"]}
+/>
 
 
           <Line
