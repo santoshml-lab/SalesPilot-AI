@@ -287,85 +287,36 @@ async function loadActivities() {
       />
 
     </div>
-    <h2 style={{ marginTop: "30px", marginBottom: "20px" }}>
-  ⚡ Quick Actions
-</h2>
-
-<div
+    <div
   style={{
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))",
-    gap: "15px",
-    marginBottom: "30px",
+    gridTemplateColumns: "repeat(4,1fr)",
+    gap: "18px",
+    marginBottom: "35px",
   }}
 >
-  <button
-    onClick={() => setPage("addCustomer")}
-    style={{
-      padding: "16px",
-      background: "#2563eb",
-      color: "white",
-      border: "none",
-      borderRadius: "12px",
-      cursor: "pointer",
-      fontWeight: "bold",
-    }}
-  >
-    ➕ Add Customer
+
+  <button className="quick-btn" onClick={() => setPage("addCustomer")}>
+    👤<br />
+    Add Customer
   </button>
 
-  <button
-    onClick={() => setPage("addLead")}
-    style={{
-      padding: "16px",
-      background: "#10b981",
-      color: "white",
-      border: "none",
-      borderRadius: "12px",
-      cursor: "pointer",
-      fontWeight: "bold",
-    }}
-  >
-    📈 Add Lead
+  <button className="quick-btn" onClick={() => setPage("addLead")}>
+    📈<br />
+    Add Lead
   </button>
 
-  <button
-    onClick={() => setPage("addDeal")}
-    style={{
-      padding: "16px",
-      background: "#f59e0b",
-      color: "white",
-      border: "none",
-      borderRadius: "12px",
-      cursor: "pointer",
-      fontWeight: "bold",
-    }}
-  >
-    💼 Add Deal
+  <button className="quick-btn" onClick={() => setPage("addDeal")}>
+    💼<br />
+    Add Deal
   </button>
 
-  <button
-    onClick={() => setPage("ai")}
-    style={{
-      padding: "16px",
-      background: "#7c3aed",
-      color: "white",
-      border: "none",
-      borderRadius: "12px",
-      cursor: "pointer",
-      fontWeight: "bold",
-    }}
-  >
-    🤖 Open AI
+  <button className="quick-btn" onClick={() => setPage("ai")}>
+    🤖<br />
+    AI Assistant
   </button>
+
 </div>
-
-    
-
-    
-  
-
-
 
   
 
