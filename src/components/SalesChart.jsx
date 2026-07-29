@@ -11,89 +11,62 @@ import {
   CartesianGrid
 } from "recharts";
 
+export default function SalesChart() {
 
-
-
-
-       
-
-  
-
-
-async function loadChart() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     loadChart();
   }, []);
-  const { data: deals } = await supabase
-    .from("deals")
-    .select("amount, status, created_at");
 
-  if (!deals) return;
+  async function loadChart() {
+    const { data: deals } = await supabase
+      .from("deals")
+      .select("amount,status,created_at");
 
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    if (!deals) return;
 
-  const result = {};
+    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
-  deals.forEach((deal) => {
-    if (deal.status !== "Won") return;
+    const result = {};
 
-    const month = months[new Date(deal.created_at).getMonth()];
+    deals.forEach((deal) => {
+      if (deal.status !== "Won") return;
 
-    result[month] = (result[month] || 0) + Number(deal.amount);
-  });
+      const month = months[new Date(deal.created_at).getMonth()];
+      result[month] = (result[month] || 0) + Number(deal.amount);
+    });
 
-  setData(
-    Object.keys(result).map((month) => ({
-      month,
-      sales: result[month],
-    }))
-  );
-}
-
-
-export default function SalesChart(){
+    setData(
+      Object.keys(result).map((month) => ({
+        month,
+        sales: result[month],
+      }))
+    );
+  }
 
   return (
-
     <div className="chart-card">
-
-      <h2>
-        Sales Growth
-      </h2>
-
+      <h2>Sales Growth</h2>
 
       <ResponsiveContainer width="100%" height={300}>
-
         <LineChart data={data}>
-
           <CartesianGrid strokeDasharray="3 3" />
-
           <XAxis dataKey="month" />
-
           <YAxis tickFormatter={(value) => `₹${value / 1000}k`} />
-
           <Tooltip
-  formatter={(value) => [`₹${Number(value).toLocaleString("en-IN")}`, "Sales"]}
-/>
-
-
+            formatter={(value) => [
+              `₹${Number(value).toLocaleString("en-IN")}`,
+              "Sales",
+            ]}
+          />
           <Line
             type="monotone"
             dataKey="sales"
             strokeWidth={3}
           />
-
         </LineChart>
-
-        
       </ResponsiveContainer>
-
-
     </div>
-
   );
-
 }
