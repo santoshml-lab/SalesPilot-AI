@@ -3,7 +3,7 @@ import { supabase } from "../lib/supabase";
 
 import "../styles/dashboard.css";
 import StatCard from "../components/StatCard";
-import SalesChart from "../components/SalesChart";
+
 
 export default function Dashboard({ setPage }) {
 
@@ -20,8 +20,8 @@ export default function Dashboard({ setPage }) {
   const [topLeads, setTopLeads] = useState([]);
   const [notifications, setNotifications] = useState([]);
   const [activities, setActivities] = useState([]);
-  const [salesCoach, setSalesCoach] = useState("");
-  const [forecastRevenue, setForecastRevenue] = useState(0);
+  
+  
 
   useEffect(() => {
     loadCustomerCount();
@@ -72,7 +72,7 @@ async function loadDeals() {
   }, 0);
 
   setRevenue(total);
-  setForecastRevenue(Math.round(total * 1.25));
+  
 }
 
 async function loadConversion() {
