@@ -122,6 +122,23 @@
   border-radius:10px;
   outline:none;
 }
+
+.customer-card {
+  width: 100%;
+  overflow: hidden;
+}
+
+.recharts-responsive-container {
+  min-height: 320px;
+}
+
+@media (max-width: 768px) {
+  .analytics-chart-grid {
+    display: grid;
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+  }
+}
   
   
   
