@@ -77,23 +77,23 @@ async function loadForecast() {
         Predict next month's sales performance using AI.
       </p>
 
-      <input
-        className="search-box-customer"
-        placeholder="Current Revenue (₹)"
-        value={sales}
-        onChange={(e) => setSales(e.target.value)}
-      />
+      <div
+  className="customer-card"
+  style={{ marginBottom: "25px" }}
+>
+  <h3>📊 Live Business Data</h3>
 
-      <br /><br />
+  <p><strong>Revenue:</strong> ₹{Number(sales).toLocaleString()}</p>
 
-      <input
-        className="search-box-customer"
-        placeholder="Total Leads"
-        value={leads}
-        onChange={(e) => setLeads(e.target.value)}
-      />
+  <p><strong>Total Leads:</strong> {leads}</p>
 
-      <br /><br />
+  <p style={{ color: "#94a3b8" }}>
+    Data is automatically loaded from your CRM.
+  </p>
+</div>
+        
+        
+        
 
       <button onClick={generateForecast}>
         🚀 Generate Forecast
