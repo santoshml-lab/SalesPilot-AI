@@ -25,6 +25,9 @@ export default function Dashboard({ setPage }) {
   const [topLeads, setTopLeads] = useState([]);
   const [notifications, setNotifications] = useState([]);
   const [activities, setActivities] = useState([]);
+  const [customers, setCustomers] = useState([]);
+  const [leads, setLeads] = useState([]);
+  const [deals, setDeals] = useState([]);
   
   
 
@@ -41,6 +44,25 @@ export default function Dashboard({ setPage }) {
     loadTopLeads();
     loadNotifications();
     loadActivities();
+    useEffect(() => {
+  loadCustomerCount();
+  loadLeadCount();
+  loadDeals();
+  loadConversion();
+
+  loadPendingReminders();
+  loadCompletedReminders();
+  loadTodayReminders();
+
+  loadTopLeads();
+  loadNotifications();
+  loadActivities();
+
+  loadCustomers();
+  loadLeads();
+  loadDealsList();
+
+}, []);
     
     
   }, []);
@@ -190,6 +212,29 @@ async function loadActivities() {
 
   setActivities(activityList);
       }
+  async function loadCustomers() {
+  const { data } = await supabase
+    .from("customers")
+    .select("*");
+
+  setCustomers(data || []);
+}
+
+async function loadLeads() {
+  const { data } = await supabase
+    .from("leads")
+    .select("*");
+
+  setLeads(data || []);
+}
+
+async function loadDealsList() {
+  const { data } = await supabase
+    .from("deals")
+    .select("*");
+
+  setDeals(data || []);
+}
 
   return (
   <div className="dashboard">
@@ -293,10 +338,14 @@ async function loadActivities() {
 
     </div>
     <GlobalSearch
-  customers={[]}
-  leads={[]}
-  deals={[]}
+  customers={customers}
+  leads={leads}
+  deals={deals}
 />
+  
+  
+  
+
 
 <h2
   style={{
