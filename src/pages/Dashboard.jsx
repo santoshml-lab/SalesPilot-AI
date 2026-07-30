@@ -327,6 +327,13 @@ async function loadActivities() {
     🤖<br />
     AI Assistant
   </button>
+      <button
+  className="quick-btn"
+  onClick={() => setPage("salesForecast")}
+>
+  📈<br />
+  Sales Forecast
+</button>
 
 </div>
     
