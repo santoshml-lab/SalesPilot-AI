@@ -25,6 +25,7 @@ import Calendar from "./pages/Calendar";
 import AddReminder from "./pages/AddReminder";
 import SalesForecast from "./pages/SalesForecast";
 import AILeadScoring from "./pages/AILeadScoring";
+import AICustomerInsights from "./pages/AICustomerInsights";
 
 export default function App() {
 
@@ -109,6 +110,7 @@ export default function App() {
         {page === "addReminder" && <AddReminder setPage={setPage} />}
         {page === "salesForecast" && <SalesForecast />}
         {page === "leadScoring" && <AILeadScoring />}
+        {page === "customerInsights" && <AICustomerInsights />}
 
       </div>
 
