@@ -30,6 +30,7 @@ export default function Dashboard({ setPage }) {
   const [deals, setDeals] = useState([]);
   
   
+  
 
   useEffect(() => {
     loadCustomerCount();
