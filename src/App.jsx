@@ -23,6 +23,7 @@ import Reports from "./pages/Reports";
 import Profile from "./pages/Profile";
 import Calendar from "./pages/Calendar";
 import AddReminder from "./pages/AddReminder";
+import SalesForecast from "./pages/SalesForecast";
 
 export default function App() {
 
