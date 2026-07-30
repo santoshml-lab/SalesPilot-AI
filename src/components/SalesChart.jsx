@@ -102,20 +102,30 @@ export default function SalesChart() {
         />
 
         <Area
-          type="monotone"
-          dataKey="sales"
-          stroke="#2563eb"
-          fill="url(#salesColor)"
-        />
+  type="monotone"
+  dataKey="sales"
+  stroke="#3b82f6"
+  strokeWidth={3}
+  fill="#3b82f6"
+  fillOpacity={0.35}
+/>
+          
+          
+          
 
         <Line
-          type="monotone"
-          dataKey="sales"
-          stroke="#2563eb"
-          strokeWidth={4}
-          dot={{ r: 5 }}
-          activeDot={{ r: 8 }}
-        />
+  type="monotone"
+  dataKey="sales"
+  stroke="#60a5fa"
+  strokeWidth={4}
+  dot={{ r: 6, fill: "#60a5fa" }}
+  activeDot={{ r: 8 }}
+/>
+          
+          
+  
+          
+          
 
       </AreaChart>
 
