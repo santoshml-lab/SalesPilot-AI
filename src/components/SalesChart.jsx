@@ -1,15 +1,20 @@
 import "../styles/chart.css";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
+
 import {
-  LineChart,
+  ResponsiveContainer,
+  AreaChart,
+  Area,
   Line,
   XAxis,
   YAxis,
   Tooltip,
-  ResponsiveContainer,
-  CartesianGrid
+  CartesianGrid,
 } from "recharts";
+
+
+
 
 export default function SalesChart() {
 
@@ -46,27 +51,83 @@ export default function SalesChart() {
   }
 
   return (
-    <div className="chart-card">
-      <h2>Sales Growth</h2>
+  <div className="chart-card">
 
-      <ResponsiveContainer width="100%" height={300}>
-        <LineChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="month" />
-          <YAxis tickFormatter={(value) => `₹${value / 1000}k`} />
-          <Tooltip
-            formatter={(value) => [
-              `₹${Number(value).toLocaleString("en-IN")}`,
-              "Sales",
-            ]}
-          />
-          <Line
-            type="monotone"
-            dataKey="sales"
-            strokeWidth={3}
-          />
-        </LineChart>
-      </ResponsiveContainer>
-    </div>
-  );
-}
+    <h2>📈 Monthly Sales Growth</h2>
+
+    <ResponsiveContainer width="100%" height={350}>
+
+      <AreaChart data={data}>
+
+        <defs>
+
+          <linearGradient
+            id="salesColor"
+            x1="0"
+            y1="0"
+            x2="0"
+            y2="1"
+          >
+            <stop
+              offset="5%"
+              stopColor="#2563eb"
+              stopOpacity={0.8}
+            />
+
+            <stop
+              offset="95%"
+              stopColor="#2563eb"
+              stopOpacity={0}
+            />
+
+          </linearGradient>
+
+        </defs>
+
+        <CartesianGrid strokeDasharray="3 3" />
+
+        <XAxis dataKey="month" />
+
+        <YAxis
+          tickFormatter={(value) =>
+            `₹${value / 1000}k`
+          }
+        />
+
+        <Tooltip
+          formatter={(value) => [
+            `₹${Number(value).toLocaleString("en-IN")}`,
+            "Sales",
+          ]}
+        />
+
+        <Area
+          type="monotone"
+          dataKey="sales"
+          stroke="#2563eb"
+          fill="url(#salesColor)"
+        />
+
+        <Line
+          type="monotone"
+          dataKey="sales"
+          stroke="#2563eb"
+          strokeWidth={4}
+          dot={{ r: 5 }}
+          activeDot={{ r: 8 }}
+        />
+
+      </AreaChart>
+
+    </ResponsiveContainer>
+
+  </div>
+);
+    
+      
+
+      
+        
+          
+          
+          
