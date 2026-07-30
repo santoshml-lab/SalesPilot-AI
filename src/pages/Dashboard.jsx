@@ -65,7 +65,7 @@ export default function Dashboard({ setPage }) {
 }, []);
     
     
-  }, []);
+  
 
   async function loadCustomerCount() {
   const { count } = await supabase
@@ -372,7 +372,7 @@ async function loadDealsList() {
     <div
   style={{
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))"
+    gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))",
     gap: "18px",
     marginBottom: "35px",
   }}
