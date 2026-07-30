@@ -6,6 +6,7 @@ import StatCard from "../components/StatCard";
 import SalesChart from "../components/SalesChart";
 import ExecutiveKPI from "../components/ExecutiveKPI";
 import AIBusinessInsights from "../components/AIBusinessInsights";
+import GlobalSearch from "../components/GlobalSearch";
 
 
 
@@ -300,6 +301,15 @@ async function loadActivities() {
     color: "white",
   }}
 >
+      <h1>📊 Sales Dashboard</h1>
+
+<GlobalSearch
+  customers={[]}
+  leads={[]}
+  deals={[]}
+/>
+
+<h2>⚡ Quick Actions</h2>
   ⚡ Quick Actions
 </h2>
     <div
