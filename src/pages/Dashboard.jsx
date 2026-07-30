@@ -292,7 +292,13 @@ async function loadActivities() {
       />
 
     </div>
-    <h2
+    <GlobalSearch
+  customers={[]}
+  leads={[]}
+  deals={[]}
+/>
+
+<h2
   style={{
     marginTop: "30px",
     marginBottom: "20px",
@@ -301,18 +307,19 @@ async function loadActivities() {
     color: "white",
   }}
 >
-      <h1>📊 Sales Dashboard</h1>
-
-<GlobalSearch
-  customers={[]}
-  leads={[]}
-  deals={[]}
-/>
-
-<h2>⚡ Quick Actions</h2>
-      
+  ⚡ Quick Actions
+</h2>
+  
+    
+    
+    
+    
+    
   
 
+
+      
+  
     <div
   style={{
     display: "grid",
