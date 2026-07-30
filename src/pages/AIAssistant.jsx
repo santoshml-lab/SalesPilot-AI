@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "../styles/customers.css";
 import AIEmailType from "../components/AIEmailType";
 import AIQuickButtons from "../components/AIQuickButtons";
+import AIResponseCard from "../components/AIResponseCard";
 export default function AIAssistant() {
 
   const [prompt, setPrompt] = useState("");
@@ -220,152 +221,16 @@ Requirements:
       border: "1px solid rgba(255,255,255,.08)",
     }}
   >
-    <h2 style={{ marginBottom: "15px" }}>
-      ✉️ AI Generated Email
-    </h2>
+    <AIResponseCard
+  response={response}
+  generateAI={generateAI}
+/>
+    
+    
 
-    <div
-      style={{
-        background: "#1e293b",
-        padding: "20px",
-        borderRadius: "10px",
-        whiteSpace: "pre-wrap",
-        lineHeight: "1.8",
-      }}
-    >
-      {response}
-    </div>
-
-    <div
-      style={{
-        display: "flex",
-        gap: "10px",
-        marginTop: "20px",
-        flexWrap: "wrap",
-      }}
-    >
-
-      <button
-        onClick={() => {
-          navigator.clipboard.writeText(response);
-          alert("✅ Email copied successfully!");
-        }}
-        style={{
-          padding: "10px 18px",
-          background: "#10b981",
-          color: "white",
-          border: "none",
-          borderRadius: "8px",
-          cursor: "pointer",
-          fontWeight: "bold",
-        }}
-      >
-        📋 Copy
-      </button>
-
-      <button
-        onClick={() => generateAI()}
-        style={{
-          padding: "10px 18px",
-          background: "#3b82f6",
-          color: "white",
-          border: "none",
-          borderRadius: "8px",
-          cursor: "pointer",
-          fontWeight: "bold",
-        }}
-      >
-        🔄 Regenerate
-      </button>
-
-      <button
-        onClick={() => {
-          const blob = new Blob([response], {
-            type: "text/plain",
-          });
-
-          const url = URL.createObjectURL(blob);
-
-          const a = document.createElement("a");
-          a.href = url;
-          a.download = "SalesPilot_Email.txt";
-          a.click();
-
-          URL.revokeObjectURL(url);
-        }}
-        style={{
-          padding: "10px 18px",
-          background: "#f59e0b",
-          color: "white",
-          border: "none",
-          borderRadius: "8px",
-          cursor: "pointer",
-          fontWeight: "bold",
-        }}
-      >
-        ⬇ Download
-      </button>
-
-    </div>
-
-  </div>
-)}
-    {history.length > 0 && (
-  <div
-    style={{
-      marginTop: "30px",
-      background: "#111827",
-      padding: "20px",
-      borderRadius: "15px",
-      border: "1px solid rgba(255,255,255,.08)",
-    }}
-  >
-    <h2 style={{ marginBottom: "20px" }}>
-      🕒 AI Chat History
-    </h2>
-
-    {history.map((item, index) => (
-      <div
-        key={index}
-        style={{
-          background: "#1e293b",
-          padding: "18px",
-          borderRadius: "10px",
-          marginBottom: "15px",
-        }}
-      >
-        <p>
-          <strong>Prompt:</strong> {item.prompt}
-        </p>
-
-        <p
-          style={{
-            marginTop: "12px",
-            whiteSpace: "pre-wrap",
-            lineHeight: "1.7",
-          }}
-        >
-          {item.response}
-        </p>
-
-        <small
-          style={{
-            color: "#94a3b8",
-            display: "block",
-            marginTop: "10px",
-          }}
-        >
-          {item.time}
-        </small>
-      </div>
-    ))}
-  </div>
-)}
-
-</div>
-
-);
-}
+    
+      
+      
         
           
             
