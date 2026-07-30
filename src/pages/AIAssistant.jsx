@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "../styles/customers.css";
 import AIEmailType from "../components/AIEmailType";
+import AIQuickButtons from "../components/AIQuickButtons";
 export default function AIAssistant() {
 
   const [prompt, setPrompt] = useState("");
@@ -172,71 +173,11 @@ Requirements:
 
     </div>
 
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit,minmax(170px,1fr))",
-        gap: "12px",
-        marginBottom: "20px",
-      }}
-    >
-
-      <button
-        className="search-input"
-        onClick={() => {
-          setEmailType("Follow-up Email");
-          setPrompt("Write a professional follow-up email.");
-        }}
-      >
-        ✉️ Email
-      </button>
-
-      <button
-        className="search-input"
-        onClick={() => {
-          setPrompt("Generate a professional sales call script.");
-        }}
-      >
-        📞 Call Script
-      </button>
-
-      <button
-        className="search-input"
-        onClick={() => {
-          setPrompt("Generate a business proposal for CRM software.");
-        }}
-      >
-        📄 Proposal
-      </button>
-
-      <button
-        className="search-input"
-        onClick={() => {
-          setPrompt("Generate a meeting summary.");
-        }}
-      >
-        📅 Meeting Summary
-      </button>
-
-      <button
-        className="search-input"
-        onClick={() => {
-          setPrompt("Write a WhatsApp follow-up message.");
-        }}
-      >
-        💬 WhatsApp
-      </button>
-
-      <button
-        className="search-input"
-        onClick={() => {
-          setPrompt("Analyze sales performance and suggest improvements.");
-        }}
-      >
-        📊 Sales Analysis
-      </button>
-
-    </div>
+    <AIQuickButtons
+  setPrompt={setPrompt}
+  setEmailType={setEmailType}
+/>
+        
 
     <textarea
       value={prompt}
