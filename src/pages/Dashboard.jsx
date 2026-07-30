@@ -4,6 +4,8 @@ import { supabase } from "../lib/supabase";
 import "../styles/dashboard.css";
 import StatCard from "../components/StatCard";
 import SalesChart from "../components/SalesChart";
+import ExecutiveKPI from "../components/ExecutiveKPI";
+
 
 
 export default function Dashboard({ setPage }) {
@@ -338,6 +340,12 @@ async function loadActivities() {
 </div>
     
 <SalesChart />
+    <ExecutiveKPI
+  revenue={revenue}
+  customers={customerCount}
+  deals={dealCount}
+  leads={leadCount}
+/>
   
 
     <div
