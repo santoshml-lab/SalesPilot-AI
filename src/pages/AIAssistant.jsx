@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "../styles/customers.css";
-
+import AIEmailType from "../components/AIEmailType";
 export default function AIAssistant() {
 
   const [prompt, setPrompt] = useState("");
@@ -107,23 +107,11 @@ Requirements:
 
     <h1>🤖 SalesPilot AI Assistant</h1>
 
-    <div style={{ marginBottom: "20px" }}>
-      <label style={{ color: "white", fontWeight: "bold" }}>
-        Email Type
-      </label>
-
-      <select
-        className="search-input"
-        value={emailType}
-        onChange={(e) => setEmailType(e.target.value)}
-      >
-        <option>Follow-up Email</option>
-        <option>Cold Outreach</option>
-        <option>Proposal Email</option>
-        <option>Meeting Request</option>
-        <option>Thank You Email</option>
-      </select>
-    </div>
+    <AIEmailType
+  emailType={emailType}
+  setEmailType={setEmailType}
+/>
+             
 
     <p
       style={{
