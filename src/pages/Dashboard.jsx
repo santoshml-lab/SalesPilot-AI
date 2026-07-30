@@ -5,6 +5,7 @@ import "../styles/dashboard.css";
 import StatCard from "../components/StatCard";
 import SalesChart from "../components/SalesChart";
 import ExecutiveKPI from "../components/ExecutiveKPI";
+import AIBusinessInsights from "../components/AIBusinessInsights";
 
 
 
@@ -341,6 +342,12 @@ async function loadActivities() {
     
 <SalesChart />
     <ExecutiveKPI
+  revenue={revenue}
+  customers={customerCount}
+  deals={dealCount}
+  leads={leadCount}
+/>
+    <AIBusinessInsights
   revenue={revenue}
   customers={customerCount}
   deals={dealCount}
