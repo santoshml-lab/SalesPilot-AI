@@ -1,11 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabase";
 import "../styles/customers.css";
+
 
 export default function SalesForecast() {
 
   const [sales, setSales] = useState("");
   const [leads, setLeads] = useState("");
   const [forecast, setForecast] = useState(null);
+
+  useEffect(() => {
+  loadForecast();
+}, []);
+
+async function loadForecast() {
+
+  const { data: deals } = await supabase
+    .from("deals")
+    .select("*");
+
+  const { data: leads } = await supabase
+    .from("leads")
+    .select("*");
+
+  const wonDeals =
+    deals?.filter((d) => d.status === "Won") || [];
+
+  const revenue = wonDeals.reduce(
+    (sum, deal) => sum + Number(deal.amount || 0),
+    0
+  );
+
+  setSales(revenue);
+  setLeads(leads?.length || 0);
+}
 
   function generateForecast() {
 
