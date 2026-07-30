@@ -2,6 +2,7 @@ import "../styles/chart.css";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 
+
 import {
   ResponsiveContainer,
   AreaChart,
