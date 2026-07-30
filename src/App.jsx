@@ -24,6 +24,7 @@ import Profile from "./pages/Profile";
 import Calendar from "./pages/Calendar";
 import AddReminder from "./pages/AddReminder";
 import SalesForecast from "./pages/SalesForecast";
+import AILeadScoring from "./pages/AILeadScoring";
 
 export default function App() {
 
@@ -107,6 +108,7 @@ export default function App() {
 )}
         {page === "addReminder" && <AddReminder setPage={setPage} />}
         {page === "salesForecast" && <SalesForecast />}
+        {page === "leadScoring" && <AILeadScoring />}
 
       </div>
 
