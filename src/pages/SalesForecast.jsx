@@ -39,6 +39,7 @@ async function loadForecast() {
 
     const totalSales = Number(sales);
     const totalLeads = Number(leads);
+    
 
     if (!totalSales || !totalLeads) {
       alert("Please enter sales and leads.");
@@ -47,15 +48,24 @@ async function loadForecast() {
 
     const growth = (totalSales * 1.15).toFixed(0);
     const conversion = ((totalSales / totalLeads) * 100).toFixed(1);
+    const trend =
+  conversion > 30
+    ? "📈 Strong Growth Expected"
+    : conversion > 15
+    ? "📊 Stable Growth"
+    : "⚠️ Improve Lead Conversion";
 
     setForecast({
-      growth,
-      conversion,
-      recommendation:
-        conversion > 30
-          ? "Excellent sales performance. Increase marketing budget."
-          : "Focus on lead nurturing and follow-up emails.",
-    });
+  growth,
+  conversion,
+  trend,
+  recommendation:
+    conversion > 30
+      ? "Excellent sales performance. Increase marketing budget."
+      : "Focus on lead nurturing and follow-up emails.",
+});
+                 
+    
 
   }
 
@@ -131,6 +141,10 @@ async function loadForecast() {
               {forecast.recommendation}
             </p>
           </div>
+          <div className="customer-card">
+  <h3>📈 Growth Trend</h3>
+  <h1>{forecast.trend}</h1>
+</div>
 
         </div>
       )}
