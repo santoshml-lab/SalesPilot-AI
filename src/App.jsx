@@ -106,6 +106,7 @@ export default function App() {
   <Calendar setPage={setPage} />
 )}
         {page === "addReminder" && <AddReminder setPage={setPage} />}
+        {page === "salesForecast" && <SalesForecast />}
 
       </div>
 
