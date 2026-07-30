@@ -310,6 +310,7 @@ async function loadActivities() {
 />
 
 <h2>⚡ Quick Actions</h2>
+      
   
 
     <div
