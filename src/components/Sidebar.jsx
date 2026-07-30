@@ -50,6 +50,9 @@ export default function Sidebar({ setPage }) {
         <li onClick={() => setPage("salesForecast")}>
   📈 Sales Forecast
 </li>
+        <li onClick={() => setPage("leadScoring")}>
+  🎯 AI Lead Scoring
+</li>
         
 
         <li onClick={() => setPage("settings")}>
