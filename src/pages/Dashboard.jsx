@@ -33,19 +33,6 @@ export default function Dashboard({ setPage }) {
   
 
   useEffect(() => {
-    loadCustomerCount();
-    loadLeadCount();
-    loadDeals();
-    loadConversion();
-
-    loadPendingReminders();
-    loadCompletedReminders();
-    loadTodayReminders();
-
-    loadTopLeads();
-    loadNotifications();
-    loadActivities();
-    useEffect(() => {
   loadCustomerCount();
   loadLeadCount();
   loadDeals();
@@ -64,6 +51,8 @@ export default function Dashboard({ setPage }) {
   loadDealsList();
 
 }, []);
+    
+    
     
     
   
